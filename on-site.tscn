@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 
 [node name="Caldo-player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 279, 223 )
+speed = null
 
 [node name="Stall-area" parent="." instance=ExtResource( 3 )]
 position = Vector2( 479, 306 )
