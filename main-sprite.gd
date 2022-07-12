@@ -16,7 +16,6 @@ func _physics_process(delta):
 	kboard = kboard.normalized() * speed
 	kboard = move_and_slide(kboard)
 	
-	print("h")
 	
 	
 	
