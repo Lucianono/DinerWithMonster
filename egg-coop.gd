@@ -6,4 +6,5 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
-	print("entered")
+	if(area.get_name() == "caldo-area"):
+		print(area.get_name())
