@@ -21,3 +21,5 @@ position = Vector2( 509, 301 )
 
 [node name="ingredient-drop" parent="." instance=ExtResource( 5 )]
 position = Vector2( 297, 316 )
+
+[connection signal="coop_entered" from="Coop" to="." method="_on_Coop_coop_entered"]

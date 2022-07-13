@@ -11,3 +11,5 @@ func _on_Area2D_area_entered(area):
 		emit_signal("coop_entered")
 		
 		print(area.get_name())
+
+
