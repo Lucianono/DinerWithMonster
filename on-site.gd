@@ -1,5 +1,6 @@
 extends Node
 
+#this is me
 
 onready var ingr = preload("res://ingredient-entity.tscn")
 onready var coop = preload("res://egg-coop.tscn")
