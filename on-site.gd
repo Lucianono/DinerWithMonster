@@ -14,7 +14,7 @@ func _ready():
 
 func _on_Coop_coop_entered():
 	var ingr_ent = ingr.instance()
-	add_child(ingr_ent)
+	call_deferred("add_child",ingr_ent)
 	ingr_ent.set_position(coop_position + Vector2(20,50))
 	print("caldo_entered")
 	

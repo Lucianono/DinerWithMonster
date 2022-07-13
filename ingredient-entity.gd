@@ -7,4 +7,5 @@ func _ready():
 
 func _on_ingredientdrop_area_entered(area):
 	if area.get_name() == "caldo-area" :
+		print("wow")
 		queue_free()
