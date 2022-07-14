@@ -14,6 +14,11 @@ config/name="Food Throw Smtn"
 run/main_scene="res://on-site.tscn"
 config/icon="res://icon.png"
 
+[global]
+
+text=false
+minimap=false
+
 [input]
 
 ui_left={
