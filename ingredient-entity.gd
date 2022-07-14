@@ -22,3 +22,11 @@ func _on_ingredientdrop_area_entered(area):
 func _process(_delta):
 	if isPlayerHolding:
 		set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(50,0))
+			
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT && isPlayerHolding:
+			if event.pressed:
+				print("Left button was clicked at ", event.position)
+				queue_free()
+		
