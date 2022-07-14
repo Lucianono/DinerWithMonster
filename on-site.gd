@@ -5,6 +5,8 @@ onready var ingr = preload("res://ingredient-entity.tscn")
 onready var coop = preload("res://egg-coop.tscn")
 var coop_position
 
+var ingr_ent
+
 func _ready():
 	coop_position = get_node("Coop").get_position()
 	print(coop_position)
@@ -13,12 +15,10 @@ func _ready():
 	
 
 func _on_Coop_coop_entered():
-	var ingr_ent = ingr.instance()
-	ingr_ent.initIngrName("egg")
-	if ingr_ent.getIngrName() == "egg":
-		print("this is egg")
-		pass
-	call_deferred("add_child",ingr_ent)
-	ingr_ent.set_position(coop_position + Vector2(20,50))
+	if !is_instance_valid(ingr_ent):	
+		ingr_ent = ingr.instance()
+		ingr_ent.initIngrName("egg")
+		call_deferred("add_child",ingr_ent)
+		ingr_ent.set_position(coop_position + Vector2(20,50))
 	print("caldo_entered")
 	
