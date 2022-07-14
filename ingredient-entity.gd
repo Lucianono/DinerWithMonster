@@ -1,9 +1,12 @@
 extends Area2D
 
 var isPlayerHolding = false
+var isPlayerThrowing = false
 var global_ingr_name = null
+var screensize
 
 func _ready():
+	screensize = get_viewport_rect().size
 	print(get_node("/root/Node2D/Caldo-player").get_position())
 	pass
 	
@@ -17,14 +20,17 @@ func getIngrName():
 
 
 func _on_ingredientdrop_area_entered(area):
-	if area.get_name() == "caldo-area" :
+	if area.get_name() == "caldo-area" && !isPlayerThrowing:
 		isPlayerHolding = true
 
 func _process(_delta):
-	if isPlayerHolding:
+	if isPlayerHolding && !isPlayerThrowing:
 		set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(70,0))
-	else :
+	elif !isPlayerHolding && isPlayerThrowing:
 		set_position(position + Vector2(10,0))
+		
+	if position.x > screensize.x:
+		queue_free()
 			
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -32,4 +38,5 @@ func _unhandled_input(event):
 			if event.pressed:
 				print("ingr freed ", event.position)
 				isPlayerHolding = false
+				isPlayerThrowing = true
 		
