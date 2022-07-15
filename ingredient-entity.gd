@@ -4,7 +4,7 @@ var isPlayerHolding = false
 var isPlayerThrowing = false
 var global_ingr_name = null
 var screensize
-var left_click_event
+var isClickOnRight = true
 
 var slope
 
@@ -28,27 +28,25 @@ func _on_ingredientdrop_area_entered(area):
 
 func _process(delta):
 	if isPlayerHolding && !isPlayerThrowing:
-		set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(70,0))
+		set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(50,0))
 	elif !isPlayerHolding && isPlayerThrowing:
-		if left_click_event.position.x > position.x:
-			set_position(position + Vector2(1,-slope)* 500 * delta)
+		if isClickOnRight:
+			set_position(position + Vector2(1,-slope)* 700 * delta)
 		else:
-			set_position(position + Vector2(-1,-slope)* 500 * delta)
+			set_position(position + Vector2(-1,slope)* 700 * delta)
 		
 		
-	if position.x > screensize.x || position.y > screensize.y:
+	if position.x > screensize.x || position.x < 0 || position.y < 0 || position.y > screensize.y:
 		queue_free()
 			
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
-				print("ingr freed ", event.position, position)
 				isPlayerHolding = false
 				isPlayerThrowing = true
-				left_click_event = event
+				isClickOnRight = event.position.x > position.x
 				
 				slope = (position.y - event.position.y)/(event.position.x - position.x)
-				print(slope)
 			
 		
