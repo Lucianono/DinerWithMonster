@@ -33,7 +33,7 @@ func _process(delta):
 		if isClickOnRight:
 			set_position(position + Vector2(1,-slope)* 700 * delta)
 		else:
-			set_position(position + Vector2(-1,slope)* 700 * delta)
+			set_position(position + Vector2(-1,slope)* 1000 * delta)
 		
 		
 	if position.x > screensize.x || position.x < 0 || position.y < 0 || position.y > screensize.y:
