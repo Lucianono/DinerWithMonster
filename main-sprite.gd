@@ -12,12 +12,13 @@ func _ready():
 	
 	
 func _physics_process(_delta):
-	
+	# when keyboard pressed
 	kboard.x = int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	kboard.y = int(Input.is_action_pressed("ui_down"))-int(Input.is_action_pressed("ui_up"))
 	kboard = kboard.normalized() * speed
 	kboard = move_and_slide(kboard)
 	
+	#limits caldo position
 	position.y = clamp(position.y, 1 + sprite_extent.y, screensize.y - sprite_extent.y)
 	position.x = clamp(position.x, 1 + sprite_extent.x, screensize.x - sprite_extent.x)
 	
