@@ -7,6 +7,7 @@ var global_ingr_name = null
 var speed = 1000
 var screensize
 var slope
+var y_intercept
 var b_triangle
 var c_triangle
 
@@ -53,19 +54,11 @@ func _unhandled_input(event):
 				
 				#may math shit for aiming shit AHHAHAHHAHA
 				slope = (position.y - event.position.y)/(event.position.x - position.x)
+				y_intercept = - (slope * position.x) - position.y
+				print(position)
+				print(event.position)
 				print(slope)
-				b_triangle = abs((screensize.x - position.x) * slope)
-				print(b_triangle)
-				c_triangle = pow(screensize.x, 2) + pow(b_triangle, 2)
-				c_triangle = sqrt(c_triangle)
-				print(c_triangle)
-				var scale_factor = (b_triangle - 100) /  b_triangle 
-				print(scale_factor)
-				var c_similar_triangle = c_triangle  * scale_factor
-				print(c_similar_triangle)
-				if slope > 1 || slope < -1:
-					speed = (c_triangle - c_similar_triangle) 
-				else :
-					speed = screensize.x
-				speed = speed/2
-				print(speed)
+				print(y_intercept)
+				var aim_screen_edge = Vector2((0 - y_intercept) / slope , 0)
+				var distance = aim_screen_edge.distance_to(position)
+				print(distance)
