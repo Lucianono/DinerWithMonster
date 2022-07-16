@@ -7,6 +7,8 @@ var global_ingr_name = null
 var speed = 1000
 var screensize
 var slope
+var b_triangle
+var c_triangle
 
 func _ready():
 	screensize = get_viewport_rect().size
@@ -32,9 +34,9 @@ func _process(delta):
 		set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(50,0))
 	elif !isPlayerHolding && isPlayerThrowing:
 		if isClickOnRight:
-			set_position(position + Vector2(1,-slope)* speed * delta)
+			set_position(position + Vector2(1.0,-slope)* speed * delta)
 		else:
-			set_position(position + Vector2(-1,slope)* speed * delta)
+			set_position(position + Vector2(-1.0,slope)* speed * delta)
 		
 	#destroy when outside the screen
 	if position.x > screensize.x || position.x < 0 || position.y < 0 || position.y > screensize.y:
@@ -51,5 +53,19 @@ func _unhandled_input(event):
 				
 				#may math shit for aiming shit AHHAHAHHAHA
 				slope = (position.y - event.position.y)/(event.position.x - position.x)
-			
-		
+				print(slope)
+				b_triangle = abs((screensize.x - position.x) * slope)
+				print(b_triangle)
+				c_triangle = pow(screensize.x, 2) + pow(b_triangle, 2)
+				c_triangle = sqrt(c_triangle)
+				print(c_triangle)
+				var b_similar_triangle = (b_triangle - position.y) /  b_triangle 
+				print(b_similar_triangle)
+				var c_similar_triangle = c_triangle  * b_similar_triangle
+				print(c_similar_triangle)
+				if slope > 1 || slope < -1:
+					speed = (c_triangle - c_similar_triangle) / 2
+				else :
+					speed = screensize.x/2
+				speed = speed/2
+				print(speed)
