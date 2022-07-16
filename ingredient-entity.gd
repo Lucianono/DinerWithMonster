@@ -59,13 +59,13 @@ func _unhandled_input(event):
 				c_triangle = pow(screensize.x, 2) + pow(b_triangle, 2)
 				c_triangle = sqrt(c_triangle)
 				print(c_triangle)
-				var b_similar_triangle = (b_triangle - position.y) /  b_triangle 
-				print(b_similar_triangle)
-				var c_similar_triangle = c_triangle  * b_similar_triangle
+				var scale_factor = (b_triangle - 100) /  b_triangle 
+				print(scale_factor)
+				var c_similar_triangle = c_triangle  * scale_factor
 				print(c_similar_triangle)
 				if slope > 1 || slope < -1:
-					speed = (c_triangle - c_similar_triangle) / 2
+					speed = (c_triangle - c_similar_triangle) 
 				else :
-					speed = screensize.x/2
+					speed = screensize.x
 				speed = speed/2
 				print(speed)
