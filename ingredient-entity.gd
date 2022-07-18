@@ -7,6 +7,7 @@ var global_ingr_name = null
 var speed = 1000
 var screensize
 var slope
+var slope_vector
 var y_intercept
 var b_triangle
 var c_triangle
@@ -35,9 +36,9 @@ func _process(delta):
 		set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(50,0))
 	elif !isPlayerHolding && isPlayerThrowing:
 		if isClickOnRight:
-			set_position(position + Vector2(1.0,-slope)* speed * delta)
+			set_position(position + Vector2(1,-1) * slope_vector * speed * delta)
 		else:
-			set_position(position + Vector2(-1.0,slope)* speed * delta)
+			set_position(position + Vector2(-1,1) * slope_vector * speed * delta)
 		
 	#destroy when outside the screen
 	if position.x > screensize.x || position.x < 0 || position.y < 0 || position.y > screensize.y:
@@ -54,11 +55,5 @@ func _unhandled_input(event):
 				
 				#may math shit for aiming shit AHHAHAHHAHA
 				slope = (position.y - event.position.y)/(event.position.x - position.x)
-				y_intercept = - (slope * position.x) - position.y
-				print(position)
-				print(event.position)
-				print(slope)
-				print(y_intercept)
-				var aim_screen_edge = Vector2((0 - y_intercept) / slope , 0)
-				var distance = aim_screen_edge.distance_to(position)
-				print(distance)
+				slope_vector = Vector2(1, slope).normalized()
+				print(slope_vector)
