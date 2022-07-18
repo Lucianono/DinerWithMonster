@@ -8,9 +8,6 @@ var speed = 1000
 var screensize
 var slope
 var slope_vector
-var y_intercept
-var b_triangle
-var c_triangle
 
 func _ready():
 	screensize = get_viewport_rect().size
