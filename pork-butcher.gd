@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-signal slaughter_entered
+signal butcher_entered
 
 func _ready():
 	pass
@@ -8,7 +8,7 @@ func _ready():
 #when caldo touch coop
 func _on_Area2D_area_entered(area):
 	if(area.get_name() == "caldo-area"):
-		emit_signal("slaughter_entered")
+		emit_signal("butcher_entered")
 		
 		print(area.get_name())
 

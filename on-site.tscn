@@ -5,7 +5,7 @@
 [ext_resource path="res://stall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://egg-coop.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ingredient-entity.tscn" type="PackedScene" id=5]
-[ext_resource path="res://pork-slaughter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://pork-butcher.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node"]
 script = ExtResource( 1 )
@@ -23,8 +23,8 @@ position = Vector2( 509, 301 )
 [node name="ingredient-drop" parent="." instance=ExtResource( 5 )]
 position = Vector2( -26, 30 )
 
-[node name="Slaughter" parent="." instance=ExtResource( 6 )]
+[node name="Butcher" parent="." instance=ExtResource( 6 )]
 position = Vector2( 57, 543 )
 
 [connection signal="coop_entered" from="Coop" to="." method="_on_Coop_coop_entered"]
-[connection signal="slaughter_entered" from="Slaughter" to="." method="_on_Slaughter_slaughter_entered"]
+[connection signal="butcher_entered" from="Butcher" to="." method="_on_Butcher_butcher_entered"]
