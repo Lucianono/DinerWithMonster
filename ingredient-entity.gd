@@ -1,5 +1,7 @@
 extends Area2D
 
+signal ingredient_freed(ingr_name_freed)
+
 var isPlayerHolding = false
 var isPlayerThrowing = false
 var isClickOnRight = true
@@ -44,8 +46,10 @@ func _process(delta):
 		
 	#destroy when outside the screen
 	if position.x > screensize.x || position.x < 0 || position.y < 0 || position.y > screensize.y:
+		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
-			
+		print("boosh")
+		
 #for left clicking
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
