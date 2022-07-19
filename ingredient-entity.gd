@@ -48,7 +48,6 @@ func _process(delta):
 	if position.x > screensize.x || position.x < 0 || position.y < 0 || position.y > screensize.y:
 		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
-		print("boosh")
 		
 #for left clicking
 func _unhandled_input(event):
