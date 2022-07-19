@@ -17,34 +17,10 @@ func _ready():
 
 #when coop touched (signal)
 func _on_Coop_coop_entered():
-	if isEggFreed:
-		
-		var ingr_ent = ingr.instance()
-		ingr_ent.initIngrName("egg")
-		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
-		call_deferred("add_child",ingr_ent)
-		ingr_ent.set_position(coop_position + Vector2(20,50))
-		isEggFreed = false
-		
-		
-		print(ingr_ent.getIngrName())
+	farm_entered(isEggFreed, "egg", coop_position + Vector2(20,50))
 	
-
-
-
 func _on_Butcher_butcher_entered():
-	if isPorkFreed:
-		
-		var ingr_ent = ingr.instance()
-		ingr_ent.initIngrName("pork")
-		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
-		call_deferred("add_child",ingr_ent)
-		ingr_ent.set_position(butcher_position + Vector2(20,-50))
-		isPorkFreed = false
-		
-		
-		print(ingr_ent.getIngrName())
-
+	farm_entered(isPorkFreed, "pork", butcher_position + Vector2(20,-50))
 
 func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 	print("ingr freed")
@@ -53,3 +29,16 @@ func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 			isEggFreed = true
 		"pork" :
 			isPorkFreed = true
+
+
+func farm_entered(isIngrFreed, ingr_name, farm_position):
+	if isIngrFreed:
+		var ingr_ent = ingr.instance()
+		ingr_ent.initIngrName(ingr_name)
+		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
+		call_deferred("add_child",ingr_ent)
+		ingr_ent.set_position(farm_position)
+		isIngrFreed = false
+		
+		
+		print(ingr_ent.getIngrName())
