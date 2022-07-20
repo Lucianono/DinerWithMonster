@@ -24,6 +24,10 @@ func initIngrName(ingr_name):
 			get_node("Sprite").set_texture(preload("res://a3.png"))
 		"pork" :
 			get_node("Sprite").set_texture(preload("res://a2.png"))
+		"wheat" :
+			get_node("Sprite").set_texture(preload("res://a4.png"))
+		"squid" :
+			get_node("Sprite").set_texture(preload("res://a5.png"))
 
 #for getting the ingredient type
 func getIngrName():

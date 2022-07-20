@@ -4,13 +4,19 @@ extends Node
 onready var ingr = preload("res://ingredient-entity.tscn")
 var coop_position
 var butcher_position
+var field_position
+var pond_positon
 
 var isEggFreed = true
 var isPorkFreed = true
+var isWheatFreed = true
+var isSquidFreed = true
 
 func _ready():
 	coop_position = get_node("Coop").get_position()
 	butcher_position = get_node("Butcher").get_position()
+	field_position = get_node("Field").get_position()
+	pond_positon = get_node("Pond").get_position()
 	randomize()
 	set_process(true)
 	
@@ -49,3 +55,29 @@ func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 			isEggFreed = true
 		"pork" :
 			isPorkFreed = true
+		"wheat" :
+			isWheatFreed = true
+		"squid" :
+			isSquidFreed = true
+
+
+func _on_Field_field_entered():
+	if isWheatFreed:
+		
+		var ingr_ent = ingr.instance()
+		ingr_ent.initIngrName("wheat")
+		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
+		call_deferred("add_child",ingr_ent)
+		ingr_ent.set_position(field_position + Vector2(20,-50))
+		isWheatFreed = false
+
+
+func _on_Pond_pond_entered():
+	if isSquidFreed:
+		
+		var ingr_ent = ingr.instance()
+		ingr_ent.initIngrName("squid")
+		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
+		call_deferred("add_child",ingr_ent)
+		ingr_ent.set_position(pond_positon + Vector2(20,50))
+		isSquidFreed = false
