@@ -81,6 +81,3 @@ func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 		"squid" :
 			isSquidFreed = true
 
-
-func _on_ingredientdrop_ingredient_grabbed(ingr_name_grabbed):
-	pass # Replace with function body.

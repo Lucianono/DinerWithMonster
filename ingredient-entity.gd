@@ -1,7 +1,6 @@
 extends Area2D
 
 signal ingredient_freed(ingr_name_freed)
-signal ingredient_grabbed(ingr_name_grabbed)
 
 var isPlayerHolding = false
 var isPlayerThrowing = false
@@ -11,9 +10,11 @@ var speed = 1000
 var screensize
 var slope
 var slope_vector
+var current_player_holding_size
 
 func _ready():
 	screensize = get_viewport_rect().size
+	current_player_holding_size = GlobalVar.player_holding.size()
 	pass
 	
 #for initializing the ingredient tyoe
@@ -36,14 +37,18 @@ func getIngrName():
 
 #when caldo picked the ingredient 
 func _on_ingredientdrop_area_entered(area):
-	if area.get_name() == "caldo-area" && !isPlayerThrowing:
+	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2:
 		isPlayerHolding = true
-		emit_signal("ingredient_grabbed")
+		GlobalVar.player_holding.append(global_ingr_name)
+		
 
 func _process(delta):
 	#for smart holding and throwing
 	if isPlayerHolding && !isPlayerThrowing:
-		set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(50,0))
+		if current_player_holding_size == 0:
+			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(70,0))
+		else :
+			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(-70,0))
 	elif !isPlayerHolding && isPlayerThrowing:
 		if isClickOnRight:
 			set_position(position + Vector2(1,-1) * slope_vector * speed * delta)
@@ -60,6 +65,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
+				
+				GlobalVar.player_holding.clear()
 				isPlayerHolding = false
 				isPlayerThrowing = true
 				isClickOnRight = event.position.x > position.x

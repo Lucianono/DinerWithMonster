@@ -35,7 +35,6 @@ position = Vector2( 264, 224 )
 position = Vector2( 48, 48 )
 
 [connection signal="ingredient_freed" from="ingredient-drop" to="." method="_on_ingredientdrop_ingredient_freed"]
-[connection signal="ingredient_grabbed" from="ingredient-drop" to="." method="_on_ingredientdrop_ingredient_grabbed"]
 [connection signal="coop_entered" from="Coop" to="." method="_on_Coop_coop_entered"]
 [connection signal="butcher_entered" from="Butcher" to="." method="_on_Butcher_butcher_entered"]
 [connection signal="field_entered" from="Field" to="." method="_on_Field_field_entered"]
