@@ -14,7 +14,6 @@ var current_player_holding_size
 
 func _ready():
 	screensize = get_viewport_rect().size
-	current_player_holding_size = GlobalVar.player_holding.size()
 	pass
 	
 #for initializing the ingredient tyoe
@@ -37,7 +36,8 @@ func getIngrName():
 
 #when caldo picked the ingredient 
 func _on_ingredientdrop_area_entered(area):
-	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2:
+	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2:	
+		current_player_holding_size = GlobalVar.player_holding.size()
 		isPlayerHolding = true
 		GlobalVar.player_holding.append(global_ingr_name)
 		
@@ -56,7 +56,7 @@ func _process(delta):
 			set_position(position + Vector2(-1,1) * slope_vector * speed * delta)
 		
 	#destroy when outside the screen
-	if position.x > screensize.x || position.x < 0 || position.y < 0 || position.y > screensize.y:
+	if position.x - 100 > screensize.x || position.x + 100 < 0 || position.y + 100 < 0 || position.y - 100 > screensize.y:
 		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
 		
