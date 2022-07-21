@@ -1,6 +1,7 @@
 extends Area2D
 
 signal ingredient_freed(ingr_name_freed)
+signal ingredient_grabbed(ingr_name_grabbed)
 
 var isPlayerHolding = false
 var isPlayerThrowing = false
@@ -37,6 +38,7 @@ func getIngrName():
 func _on_ingredientdrop_area_entered(area):
 	if area.get_name() == "caldo-area" && !isPlayerThrowing:
 		isPlayerHolding = true
+		emit_signal("ingredient_grabbed")
 
 func _process(delta):
 	#for smart holding and throwing

@@ -2,6 +2,7 @@ extends Node
 
 
 onready var ingr = preload("res://ingredient-entity.tscn")
+
 var coop_position
 var butcher_position
 var field_position
@@ -32,8 +33,6 @@ func _on_Coop_coop_entered():
 		ingr_ent.set_position(coop_position + Vector2(20,50))
 		isEggFreed = false
 		
-	
-
 
 #when butcher touched (signal)
 func _on_Butcher_butcher_entered():
@@ -46,20 +45,6 @@ func _on_Butcher_butcher_entered():
 		ingr_ent.set_position(butcher_position + Vector2(20,-50))
 		isPorkFreed = false
 		
-
-#when ingredient freed
-func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
-	print("ingr freed")
-	match ingr_name_freed:
-		"egg" :
-			isEggFreed = true
-		"pork" :
-			isPorkFreed = true
-		"wheat" :
-			isWheatFreed = true
-		"squid" :
-			isSquidFreed = true
-
 
 func _on_Field_field_entered():
 	if isWheatFreed:
@@ -81,3 +66,21 @@ func _on_Pond_pond_entered():
 		call_deferred("add_child",ingr_ent)
 		ingr_ent.set_position(pond_positon + Vector2(20,50))
 		isSquidFreed = false
+
+
+#when ingredient freed
+func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
+	print("ingr freed")
+	match ingr_name_freed:
+		"egg" :
+			isEggFreed = true
+		"pork" :
+			isPorkFreed = true
+		"wheat" :
+			isWheatFreed = true
+		"squid" :
+			isSquidFreed = true
+
+
+func _on_ingredientdrop_ingredient_grabbed(ingr_name_grabbed):
+	pass # Replace with function body.
