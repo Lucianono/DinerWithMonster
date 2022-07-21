@@ -2,11 +2,13 @@ extends Node
 
 
 onready var ingr = preload("res://ingredient-entity.tscn")
+onready var dish = preload("res://dish-entity.tscn")
 
 var coop_position
 var butcher_position
 var field_position
 var pond_positon
+var grill_postion
 
 var isEggFreed = true
 var isPorkFreed = true
@@ -18,6 +20,7 @@ func _ready():
 	butcher_position = get_node("Butcher").get_position()
 	field_position = get_node("Field").get_position()
 	pond_positon = get_node("Pond").get_position()
+	grill_postion = get_node("Grill").get_position()
 	randomize()
 	set_process(true)
 	
@@ -81,3 +84,10 @@ func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 		"squid" :
 			isSquidFreed = true
 
+
+
+
+func _on_Grill_player_cooking(DishStatus):
+	var dish_ent = dish.instance()
+	call_deferred("add_child",dish_ent)
+	dish_ent.set_position(grill_postion + Vector2(-20,50))
