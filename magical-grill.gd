@@ -1,6 +1,8 @@
 extends StaticBody2D
 
-signal player_cooking(DishStatus)
+signal player_cooking
+
+var dish_created
 
 func _ready():
 	pass
@@ -9,18 +11,17 @@ func _ready():
 func _on_Area2D_area_entered(area):
 	if(area.get_name() == "caldo-area"):
 		
-		var isDishAvailable = true
-		match GlobalVar.player_holding :
+		match GlobalVar.player_dish_holding :
 			["pork","wheat"], ["wheat","pork"]:
-				GlobalVar.player_dish_holding = "MeatBalls"
+				dish_created = "MeatBalls"
 				print("MeatBalls")
 			_:
-				isDishAvailable = false
+				dish_created = null
 				print("None")
 		
 		
 		
 		
-		emit_signal("player_cooking",isDishAvailable)
+		emit_signal("player_cooking")
 		
 		print("cooking")

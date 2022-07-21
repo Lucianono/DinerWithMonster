@@ -39,7 +39,7 @@ func getIngrName():
 
 #when caldo picked the ingredient 
 func _on_ingredientdrop_area_entered(area):
-	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2:	
+	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2 && GlobalVar.player_dish_holding == null:	
 		disconnect("area_entered",self,"_on_ingredientdrop_area_entered")
 		current_player_holding_size = GlobalVar.player_holding.size()
 		isPlayerHolding = true
