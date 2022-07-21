@@ -6,7 +6,10 @@ var isPlayerHolding = false
 var isPlayerThrowing = false
 var isClickOnRight = true
 var global_ingr_name = null
+
+var hold_pos = 50
 var speed = 1000
+
 var screensize
 var slope
 var slope_vector
@@ -37,6 +40,7 @@ func getIngrName():
 #when caldo picked the ingredient 
 func _on_ingredientdrop_area_entered(area):
 	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2:	
+		disconnect("area_entered",self,"_on_ingredientdrop_area_entered")
 		current_player_holding_size = GlobalVar.player_holding.size()
 		isPlayerHolding = true
 		GlobalVar.player_holding.append(global_ingr_name)
@@ -46,9 +50,9 @@ func _process(delta):
 	#for smart holding and throwing
 	if isPlayerHolding && !isPlayerThrowing:
 		if current_player_holding_size == 0:
-			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(70,0))
+			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(hold_pos,0))
 		else :
-			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(-70,0))
+			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(-hold_pos,0))
 	elif !isPlayerHolding && isPlayerThrowing:
 		if isClickOnRight:
 			set_position(position + Vector2(1,-1) * slope_vector * speed * delta)
