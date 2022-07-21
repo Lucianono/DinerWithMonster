@@ -1,6 +1,6 @@
 extends Area2D
 
-signal ingredient_freed(ingr_name_freed)
+signal dish_freed(dish_name_freed)
 
 var isPlayerHolding = false
 var isPlayerThrowing = false
@@ -27,12 +27,12 @@ func initDishName(dish_name):
 			get_node("Sprite").set_texture(preload("res://a3.png"))
 
 #for getting the ingredient type
-func getIngrName():
+func getDishName():
 	return global_dish_name
 
 #when caldo picked the ingredient 
 func _on_dishready_area_entered(area):
-	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_dish_holding == null:	
+	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_dish_holding == null :	
 		isPlayerHolding = true
 		
 
@@ -48,7 +48,8 @@ func _process(delta):
 		
 	#destroy when outside the screen
 	if position.x - 100 > screensize.x || position.x + 100 < 0 || position.y + 100 < 0 || position.y - 100 > screensize.y:
-		emit_signal("ingredient_freed",global_dish_name)
+		emit_signal("dish_freed",global_dish_name)
+		print("uwu")
 		queue_free()
 		
 #for left clicking
