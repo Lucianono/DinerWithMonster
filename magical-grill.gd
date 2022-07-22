@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-signal player_cooking
+signal player_cooking(dish_name)
 
 var dish_created
 
@@ -36,13 +36,10 @@ func _on_Area2D_area_entered(area):
 				dish_created = null
 				print("None")
 				
-		print(get_node("/root/Node2D/ingredient-drop").getIngrName())
-		
-		
 		print(dish_created)
 		
 		
 		
-		emit_signal("player_cooking")
+		emit_signal("player_cooking",dish_created)
 		
 		print("cooking")

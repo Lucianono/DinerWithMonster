@@ -34,6 +34,7 @@ func getDishName():
 func _on_dishready_area_entered(area):
 	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_dish_holding == null :	
 		isPlayerHolding = true
+		GlobalVar.player_dish_holding = global_dish_name
 		
 
 func _process(delta):
