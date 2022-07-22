@@ -60,7 +60,7 @@ func _process(delta):
 			set_position(position + Vector2(-1,1) * slope_vector * speed * delta)
 		
 	#destroy when outside the screen
-	if position.x - 100 > screensize.x || position.x + 100 < 0 || position.y + 100 < 0 || position.y - 100 > screensize.y:
+	if position.x - 100 > screensize.x || position.x + 100 < 0 || position.y + 100 < 0 || position.y - 100 > screensize.y || GlobalVar.player_dish_holding != null:
 		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
 		
@@ -75,7 +75,7 @@ func _unhandled_input(event):
 				isPlayerThrowing = true
 				isClickOnRight = event.position.x > position.x
 				
-				#may math shit for aiming shit AHHAHAHHAHA
+				#may math sht for aiming sht AHHAHAHHAHA
 				slope = (position.y - event.position.y)/(event.position.x - position.x)
 				slope_vector = Vector2(1, slope).normalized()
 				print(slope_vector)

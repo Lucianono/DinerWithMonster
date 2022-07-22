@@ -89,7 +89,7 @@ func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 
 
 func _on_Grill_player_cooking():
-	if isDishFreed:
+	if isDishFreed && GlobalVar.player_holding != []:
 		var dish_ent = dish.instance()
 		dish_ent.connect("dish_freed",self,"_on_dishready_dish_freed")
 		call_deferred("add_child",dish_ent)
