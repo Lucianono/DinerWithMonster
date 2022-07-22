@@ -50,7 +50,6 @@ func _process(delta):
 	#destroy when outside the screen
 	if position.x - 100 > screensize.x || position.x + 100 < 0 || position.y + 100 < 0 || position.y - 100 > screensize.y:
 		emit_signal("dish_freed",global_dish_name)
-		print("uwu")
 		queue_free()
 		
 #for left clicking

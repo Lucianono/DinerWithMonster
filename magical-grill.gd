@@ -11,6 +11,7 @@ func _ready():
 func _on_Area2D_area_entered(area):
 	if(area.get_name() == "caldo-area"):
 		
+		GlobalVar.isPlayerCooking = true
 		match GlobalVar.player_holding :
 			["squid"]:
 				dish_created = "Adobo"
@@ -37,9 +38,5 @@ func _on_Area2D_area_entered(area):
 				print("None")
 				
 		print(dish_created)
-		
-		
-		
 		emit_signal("player_cooking",dish_created)
-		
 		print("cooking")

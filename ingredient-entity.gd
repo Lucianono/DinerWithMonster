@@ -64,6 +64,12 @@ func _process(delta):
 		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
 		
+	#destroy when cooked
+	if GlobalVar.isPlayerCooking && global_ingr_name in GlobalVar.player_holding:
+		GlobalVar.player_holding.erase(global_ingr_name)
+		emit_signal("ingredient_freed",global_ingr_name)
+		queue_free()
+		
 #for left clicking
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
