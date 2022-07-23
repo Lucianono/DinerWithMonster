@@ -5,7 +5,7 @@ var player_dish_holding = null
 var isPlayerCooking = false
 
 func _ready():
-	set_process(true)
+	set_process(false)
 	pass
 
 func _process(_delta):

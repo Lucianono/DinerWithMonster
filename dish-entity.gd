@@ -32,7 +32,7 @@ func getDishName():
 
 #when caldo picked the ingredient 
 func _on_dishready_area_entered(area):
-	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_dish_holding == null :	
+	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_dish_holding == null && GlobalVar.player_holding == []:	
 		isPlayerHolding = true
 		GlobalVar.player_dish_holding = global_dish_name
 		

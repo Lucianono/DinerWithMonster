@@ -90,12 +90,13 @@ func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 
 func _on_Grill_player_cooking(dish_name_created):
 	if isDishFreed && GlobalVar.player_holding != []:
+		print("cooking")
+		GlobalVar.isPlayerCooking = true
 		var dish_ent = dish.instance()
 		dish_ent.initDishName(dish_name_created)
 		dish_ent.connect("dish_freed",self,"_on_dishready_dish_freed")
 		call_deferred("add_child",dish_ent)
 		dish_ent.set_position(grill_postion + Vector2(-20,50))
-		GlobalVar.isPlayerCooking = false
 		isDishFreed = false	
 	
 
