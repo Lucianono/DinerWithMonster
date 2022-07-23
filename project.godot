@@ -11,12 +11,12 @@ config_version=4
 [application]
 
 config/name="Food Throw Smtn"
-run/main_scene="res://on-site.tscn"
+run/main_scene="res://SceneScripts/on-site.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-GlobalVar="*res://GlobalVar.gd"
+GlobalVar="*res://SceneScripts/GlobalVar.gd"
 
 [global]
 
@@ -60,4 +60,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://SceneScripts/default_env.tres"

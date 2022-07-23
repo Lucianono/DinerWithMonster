@@ -1,8 +1,8 @@
 extends Node
 
 
-onready var ingr = preload("res://ingredient-entity.tscn")
-onready var dish = preload("res://dish-entity.tscn")
+onready var ingr = preload("res://SceneScripts/ingredient-entity.tscn")
+onready var dish = preload("res://SceneScripts/dish-entity.tscn")
 
 var coop_position
 var butcher_position
@@ -100,5 +100,5 @@ func _on_Grill_player_cooking(dish_name_created):
 	
 
 
-func _on_dishready_dish_freed(dish_name_freed):
+func _on_dishready_dish_freed(_dish_name_freed):
 	print("dish freed")

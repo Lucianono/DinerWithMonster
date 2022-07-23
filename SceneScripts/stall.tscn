@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://64.PNG" type="Texture" id=1]
-[ext_resource path="res://stall.gd" type="Script" id=2]
+[ext_resource path="res://ImageAssets/64.PNG" type="Texture" id=1]
+[ext_resource path="res://SceneScripts/stall.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 324 )

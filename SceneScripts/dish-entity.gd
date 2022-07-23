@@ -22,9 +22,6 @@ func _ready():
 func initDishName(dish_name):
 	global_dish_name = dish_name
 	print(dish_name)
-	match global_dish_name :
-		"egg" :
-			get_node("Sprite").set_texture(preload("res://a3.png"))
 
 #for getting the ingredient type
 func getDishName():

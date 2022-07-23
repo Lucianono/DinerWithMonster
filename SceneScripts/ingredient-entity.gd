@@ -25,13 +25,13 @@ func initIngrName(ingr_name):
 	print(ingr_name)
 	match global_ingr_name :
 		"egg" :
-			get_node("Sprite").set_texture(preload("res://a3.png"))
+			get_node("Sprite").set_texture(preload("res://ImageAssets/a3.png"))
 		"pork" :
-			get_node("Sprite").set_texture(preload("res://a2.png"))
+			get_node("Sprite").set_texture(preload("res://ImageAssets/a2.png"))
 		"wheat" :
-			get_node("Sprite").set_texture(preload("res://a4.png"))
+			get_node("Sprite").set_texture(preload("res://ImageAssets/a4.png"))
 		"squid" :
-			get_node("Sprite").set_texture(preload("res://a5.png"))
+			get_node("Sprite").set_texture(preload("res://ImageAssets/a5.png"))
 
 #for getting the ingredient type
 func getIngrName():
