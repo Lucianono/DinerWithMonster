@@ -14,7 +14,6 @@ var isEggFreed = true
 var isPorkFreed = true
 var isWheatFreed = true
 var isSquidFreed = true
-var isDishFreed = true
 
 func _ready():
 	coop_position = get_node("Coop").get_position()
@@ -89,18 +88,17 @@ func _on_ingredientdrop_ingredient_freed(ingr_name_freed):
 
 
 func _on_Grill_player_cooking(dish_name_created):
-	if isDishFreed && GlobalVar.player_holding != []:
+	if GlobalVar.player_holding != []:
 		print("cooking")
 		GlobalVar.isPlayerCooking = true
 		var dish_ent = dish.instance()
 		dish_ent.initDishName(dish_name_created)
 		dish_ent.connect("dish_freed",self,"_on_dishready_dish_freed")
 		call_deferred("add_child",dish_ent)
-		dish_ent.set_position(grill_postion + Vector2(-20,50))
-		isDishFreed = false	
+		randomize()
+		dish_ent.set_position(grill_postion + Vector2(rand_range(-20,-30),rand_range(0,60)))
 	
 
 
 func _on_dishready_dish_freed(dish_name_freed):
 	print("dish freed")
-	isDishFreed = true
