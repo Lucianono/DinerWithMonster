@@ -1,13 +1,12 @@
 extends StaticBody2D
 
-signal coop_entered
+signal pond_entered
 
 func _ready():
 	pass
 
-#when caldo touch coop
+#when caldo touch wheat
 func _on_Area2D_area_entered(area):
 	if(area.get_name() == "caldo-area"):
-		emit_signal("coop_entered")
-
+		emit_signal("pond_entered")
 

@@ -14,6 +14,10 @@ config/name="Food Throw Smtn"
 run/main_scene="res://on-site.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalVar="*res://GlobalVar.gd"
+
 [global]
 
 text=false

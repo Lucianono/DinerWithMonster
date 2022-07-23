@@ -1,13 +1,12 @@
 extends StaticBody2D
 
-signal coop_entered
+signal butcher_entered
 
 func _ready():
 	pass
 
-#when caldo touch coop
+#when caldo touch butcher
 func _on_Area2D_area_entered(area):
 	if(area.get_name() == "caldo-area"):
-		emit_signal("coop_entered")
-
+		emit_signal("butcher_entered")
 
