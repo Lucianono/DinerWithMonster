@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://SceneScripts/on-site.gd" type="Script" id=1]
 [ext_resource path="res://SceneScripts/main-sprite.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://SceneScripts/magical-grill.tscn" type="PackedScene" id=9]
 [ext_resource path="res://SceneScripts/dish-entity.tscn" type="PackedScene" id=10]
 [ext_resource path="res://SceneScripts/Background.tscn" type="PackedScene" id=11]
+[ext_resource path="res://SceneScripts/aswang-enemy.tscn" type="PackedScene" id=12]
 
 [node name="Node2D" type="Node"]
 script = ExtResource( 1 )
@@ -26,7 +27,7 @@ position = Vector2( -42, 49 )
 position = Vector2( 462, -94 )
 
 [node name="Stall-area" parent="." instance=ExtResource( 3 )]
-position = Vector2( 536, 304 )
+position = Vector2( 544, 606 )
 
 [node name="Coop" parent="." instance=ExtResource( 4 )]
 position = Vector2( 264, 320 )
@@ -44,7 +45,11 @@ position = Vector2( 48, 48 )
 position = Vector2( 440, 50 )
 
 [node name="MapBg" parent="." instance=ExtResource( 11 )]
+visible = false
 z_index = -1
+
+[node name="Aswang-enemy" parent="." instance=ExtResource( 12 )]
+position = Vector2( 801, 160 )
 
 [connection signal="ingredient_freed" from="ingredient-drop" to="." method="_on_ingredientdrop_ingredient_freed"]
 [connection signal="dish_freed" from="dish-ready" to="." method="_on_dishready_dish_freed"]
