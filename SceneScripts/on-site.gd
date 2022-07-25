@@ -27,6 +27,7 @@ func _ready():
 	field_position = get_node("Field").get_position()
 	pond_positon = get_node("Pond").get_position()
 	grill_postion = get_node("Grill").get_position()
+	stall_position = get_node("Stall-area").get_position()
 	randomize()
 	set_process(true)
 	
@@ -119,6 +120,7 @@ func _on_dishready_dish_freed(_dish_name_freed):
 onready var aswang = preload ("res://SceneScripts/aswang-enemy.tscn")
 var arr_cust_line = []
 var cust_col_ctr = 0
+var stall_position
 
 #array declaration on _ready
 
@@ -155,22 +157,22 @@ func customer_assign():
 		var destination_pos = Vector2()
 		match current_col:
 			0:
-				destination_pos.x = 600
+				destination_pos.x = stall_position.x
 			1:
-				destination_pos.x = 700
+				destination_pos.x = (screensize.x - stall_position.x)/3 + stall_position.x
 			2:
-				destination_pos.x = 800
+				destination_pos.x = (2 * (screensize.x - stall_position.x)/3) + stall_position.x
 				
 		match current_row:
 			0:
-				destination_pos.y = 100
+				destination_pos.y = 0
 			1:
-				destination_pos.y = 200
+				destination_pos.y = screensize.y/4
 			2:
-				destination_pos.y = 300
+				destination_pos.y = screensize.y/2
 			3:
-				destination_pos.y = 400
+				destination_pos.y = 3 * screensize.y/4
 				
-		aswang_ent.set_position(Vector2(screensize.x,destination_pos.y))
-		aswang_ent.initPositions(destination_pos.x)
+		aswang_ent.set_position(Vector2(screensize.x,destination_pos.y+70))
+		aswang_ent.initPositions(destination_pos.x+100)
 		print(destination_pos)
