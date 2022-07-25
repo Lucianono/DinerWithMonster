@@ -171,6 +171,6 @@ func customer_assign():
 			3:
 				destination_pos.y = 400
 				
-		aswang_ent.set_position(destination_pos)
-		print(aswang_ent.position)
+		aswang_ent.set_position(Vector2(screensize.x,destination_pos.y))
+		aswang_ent.initPositions(destination_pos.x)
 		print(destination_pos)
