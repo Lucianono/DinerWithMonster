@@ -3,6 +3,7 @@ extends Node
 
 onready var ingr = preload("res://SceneScripts/ingredient-entity.tscn")
 onready var dish = preload("res://SceneScripts/dish-entity.tscn")
+var screensize
 
 var coop_position
 var butcher_position
@@ -19,6 +20,8 @@ var cust_column = 3
 var cust_row = 4
 
 func _ready():
+	screensize = get_viewport().size
+	
 	coop_position = get_node("Coop").get_position()
 	butcher_position = get_node("Butcher").get_position()
 	field_position = get_node("Field").get_position()
@@ -125,21 +128,49 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
-				randomize()
-				var aswang_ent = aswang.instance()
-				
-				
-				for i in 20 :
-					if arr_cust_line[cust_col_ctr].has(null) :
-						var rand_row = rand_range(0,cust_row)
-						if arr_cust_line[cust_col_ctr][rand_row] == null :
-							arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
-							print(arr_cust_line)
-							call_deferred("add_child",aswang.instance())
-							break
-					else :
-						cust_col_ctr+=1
-						cust_col_ctr = clamp(cust_col_ctr,0,cust_column-1)
+			
+				customer_assign()	
 				
 				
 				
+func customer_assign():
+		randomize()
+		var aswang_ent = aswang.instance()
+		var current_row		
+				
+		for i in 20 :
+			if arr_cust_line[cust_col_ctr].has(null) :
+				var rand_row = int(rand_range(0,cust_row))
+				if arr_cust_line[cust_col_ctr][rand_row] == null :
+					arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
+					current_row = rand_row
+					call_deferred("add_child",aswang_ent)
+					break
+			else :
+				cust_col_ctr+=1
+				cust_col_ctr = clamp(cust_col_ctr,0,cust_column-1)
+				
+		var current_col = cust_col_ctr
+		
+		var destination_pos = Vector2()
+		match current_col:
+			0:
+				destination_pos.x = 600
+			1:
+				destination_pos.x = 700
+			2:
+				destination_pos.x = 800
+				
+		match current_row:
+			0:
+				destination_pos.y = 100
+			1:
+				destination_pos.y = 200
+			2:
+				destination_pos.y = 300
+			3:
+				destination_pos.y = 400
+				
+		aswang_ent.set_position(destination_pos)
+		print(aswang_ent.position)
+		print(destination_pos)

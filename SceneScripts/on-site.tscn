@@ -48,7 +48,7 @@ position = Vector2( 440, 50 )
 z_index = -1
 
 [node name="Aswang-enemy" parent="." instance=ExtResource( 12 )]
-position = Vector2( 801, 160 )
+position = Vector2( 1082, 168 )
 
 [connection signal="ingredient_freed" from="ingredient-drop" to="." method="_on_ingredientdrop_ingredient_freed"]
 [connection signal="dish_freed" from="dish-ready" to="." method="_on_dishready_dish_freed"]
