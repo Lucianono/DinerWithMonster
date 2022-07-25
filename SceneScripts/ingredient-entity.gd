@@ -11,7 +11,6 @@ var hold_pos = 50
 var speed = 1000
 
 var screensize
-var slope
 var slope_vector
 var current_player_holding_size
 
@@ -83,7 +82,4 @@ func _unhandled_input(event):
 				isPlayerThrowing = true
 				isClickOnRight = event.position.x > position.x
 				
-				#may math sht for aiming sht AHHAHAHHAHA
-				slope = (position.y - event.position.y)/(event.position.x - position.x)
-				slope_vector = Vector2(1, slope).normalized()
-				print(slope_vector)
+				slope_vector = GlobalVar.slope_calculate(position,event.position)

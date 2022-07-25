@@ -27,7 +27,7 @@ position = Vector2( -42, 49 )
 position = Vector2( 462, -94 )
 
 [node name="Stall-area" parent="." instance=ExtResource( 3 )]
-position = Vector2( 544, 606 )
+position = Vector2( 541, 330 )
 
 [node name="Coop" parent="." instance=ExtResource( 4 )]
 position = Vector2( 264, 320 )

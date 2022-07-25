@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 var speed = 1000
-var slope
 var slope_vector
 
 var isClickOnRight = true
@@ -13,8 +12,7 @@ func _ready():
 func _physics_process(delta):
 	isClickOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
 	
-	slope = (position.y - get_node("/root/Node2D/Caldo-player").get_position().y)/(get_node("/root/Node2D/Caldo-player").get_position().x - position.x)
-	slope_vector = Vector2(1, slope).normalized()
+	slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
 	
 	
 	#for smart holding and throwing
