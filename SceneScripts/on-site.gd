@@ -31,7 +31,7 @@ func _ready():
 	for i in cust_column:
 		arr_cust_line.append([])
 		for j in cust_row:
-			arr_cust_line[i].append(0)
+			arr_cust_line[i].append(null)
 
 #when coop touched (signal)
 func _on_Coop_coop_entered():
@@ -115,6 +115,8 @@ func _on_dishready_dish_freed(_dish_name_freed):
 
 onready var aswang = preload ("res://SceneScripts/aswang-enemy.tscn")
 var arr_cust_line = []
+var cust_col_ctr = 0
+
 #array declaration on _ready
 
 
@@ -126,8 +128,18 @@ func _unhandled_input(event):
 				randomize()
 				var aswang_ent = aswang.instance()
 				
-				if arr_cust_line[0].has(0) :
-					arr_cust_line[0][rand_range(0,cust_row-1)] = aswang_ent
-				print(arr_cust_line)
-				call_deferred("add_child",aswang.instance())
+				
+				for i in 20 :
+					if arr_cust_line[cust_col_ctr].has(null) :
+						var rand_row = rand_range(0,cust_row)
+						if arr_cust_line[cust_col_ctr][rand_row] == null :
+							arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
+							print(arr_cust_line)
+							call_deferred("add_child",aswang.instance())
+							break
+					else :
+						cust_col_ctr+=1
+						cust_col_ctr = clamp(cust_col_ctr,0,cust_column-1)
+				
+				
 				
