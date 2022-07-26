@@ -150,6 +150,7 @@ func customer_assign():
 			if arr_cust_line[cust_col_ctr][rand_row] == null :
 				arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
 				current_row = rand_row
+				aswang_ent.initCustIndex(cust_col_ctr,rand_row)
 				aswang_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
 				call_deferred("add_child",aswang_ent)
 				aswang_ent.initFoodOrder(["Pandesal"])
@@ -159,12 +160,7 @@ func customer_assign():
 			cust_col_ctr = clamp(cust_col_ctr,0,cust_column-1)
 				
 		
-	var cust_index = GlobalVar.organize_line(cust_col_ctr,rand_row)
-	print(cust_col_ctr)
-	if rand_row == null:
-		rand_row = 0
-	arr_cust_line[cust_col_ctr][rand_row].set_position(Vector2(screensize.x,cust_index.y+70))
-	arr_cust_line[cust_col_ctr][rand_row].initPositions(cust_index.x+100)
+	
 
 	
 func reassemble_line():
@@ -174,4 +170,3 @@ func reassemble_line():
 
 func _on_Aswangenemy_customer_satisfied():
 	print("uwu")
-	pass # Replace with function body.

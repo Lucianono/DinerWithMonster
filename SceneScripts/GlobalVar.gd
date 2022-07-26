@@ -33,6 +33,8 @@ func organize_line(col,row):
 			destination_pos.x = (screensize.x - stall_position.x)/3 + stall_position.x
 		2:
 			destination_pos.x = (2 * (screensize.x - stall_position.x)/3) + stall_position.x
+		_:
+			destination_pos.x = screensize.x + 300
 				
 	match row:
 		0:
@@ -43,6 +45,8 @@ func organize_line(col,row):
 			destination_pos.y = screensize.y/2
 		3:
 			destination_pos.y = 3 * screensize.y/4
+		_:
+			destination_pos.y = -200
 				
 	print(destination_pos)
 	return(destination_pos)

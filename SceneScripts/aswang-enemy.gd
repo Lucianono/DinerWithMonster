@@ -11,11 +11,22 @@ var global_dish_order = []
 var isPassive = true
 var isAngry = false
 
+var cust_col
+var cust_row
+var line_pos
+
 
 func _ready():
 	screensize = get_viewport_rect().size
+	
+	line_pos = GlobalVar.organize_line(cust_col,cust_row)
+	position = Vector2(screensize.x,line_pos.y+70)
+	
 	set_physics_process(true)
-	pass
+
+func initCustIndex(col,row):
+	cust_col = col
+	cust_row = row
 
 func initPositions(dest_pos_x):
 	global_dest_pos_x = dest_pos_x
@@ -23,13 +34,13 @@ func initPositions(dest_pos_x):
 func initFoodOrder(dish):
 	global_dish_order = dish
 	print(global_dish_order)
-	pass
+	
 	
 func _physics_process(delta):
 	
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		position.x = clamp(position.x,global_dest_pos_x,screensize.x+300)
+		position.x = clamp(position.x,line_pos.x+100,screensize.x+300)
 	
 	else :
 		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
