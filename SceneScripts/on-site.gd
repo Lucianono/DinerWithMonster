@@ -104,6 +104,7 @@ func _on_Grill_player_cooking(dish_name_created):
 		GlobalVar.isPlayerCooking = true
 		var dish_ent = dish.instance()
 		dish_ent.initDishName(dish_name_created)
+		#dish_ent.set_name(dish_ent.getDishName())
 		dish_ent.connect("dish_freed",self,"_on_dishready_dish_freed")
 		call_deferred("add_child",dish_ent)
 		randomize()
@@ -147,6 +148,7 @@ func customer_assign():
 					arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
 					current_row = rand_row
 					call_deferred("add_child",aswang_ent)
+					aswang_ent.initFoodOrder("MeatBalls",null,null)
 					break
 			else :
 				cust_col_ctr+=1

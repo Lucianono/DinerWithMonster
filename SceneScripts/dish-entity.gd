@@ -14,6 +14,7 @@ var screensize
 var slope_vector
 
 func _ready():
+	add_to_group("dishes")
 	screensize = get_viewport_rect().size
 	pass
 	

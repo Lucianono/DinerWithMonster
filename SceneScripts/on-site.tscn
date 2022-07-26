@@ -23,8 +23,8 @@ z_index = 1
 [node name="ingredient-drop" parent="." instance=ExtResource( 5 )]
 position = Vector2( -42, 49 )
 
-[node name="dish-ready" parent="." instance=ExtResource( 10 )]
-position = Vector2( 462, -94 )
+[node name="dish-ready" parent="." groups=["dishes"] instance=ExtResource( 10 )]
+position = Vector2( 456, 158 )
 
 [node name="Stall-area" parent="." instance=ExtResource( 3 )]
 position = Vector2( 541, 330 )
