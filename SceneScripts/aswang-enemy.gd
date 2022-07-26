@@ -27,7 +27,7 @@ func _physics_process(delta):
 	
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		position.x = clamp(position.x,global_dest_pos_x,screensize.x)
+		position.x = clamp(position.x,global_dest_pos_x,screensize.x+100)
 	
 	else :
 		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
@@ -39,6 +39,8 @@ func _physics_process(delta):
 		else:
 			move_and_slide(Vector2(-1,1) * slope_vector * speed * delta)
 			
+	if position.x - 200 > screensize.x :
+		queue_free()
 		
 
 
