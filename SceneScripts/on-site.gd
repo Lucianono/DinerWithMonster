@@ -21,13 +21,15 @@ var cust_row = 4
 
 func _ready():
 	screensize = get_viewport().size
-	
+
 	coop_position = get_node("Coop").get_position()
 	butcher_position = get_node("Butcher").get_position()
 	field_position = get_node("Field").get_position()
 	pond_positon = get_node("Pond").get_position()
 	grill_postion = get_node("Grill").get_position()
 	stall_position = get_node("Stall-area").get_position()
+	GlobalVar.stall_position = stall_position
+	
 	randomize()
 	set_process(true)
 	
@@ -122,6 +124,8 @@ var arr_cust_line = []
 var cust_col_ctr = 0
 var stall_position
 
+var current_row
+var current_col
 #array declaration on _ready
 
 
@@ -136,44 +140,38 @@ func _unhandled_input(event):
 				
 				
 func customer_assign():
-		randomize()
-		var aswang_ent = aswang.instance()
-		var current_row		
+	randomize()
+	var aswang_ent = aswang.instance()
+	var rand_row
 				
-		for i in 20 :
-			if arr_cust_line[cust_col_ctr].has(null) :
-				var rand_row = int(rand_range(0,cust_row))
-				if arr_cust_line[cust_col_ctr][rand_row] == null :
-					arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
-					current_row = rand_row
-					call_deferred("add_child",aswang_ent)
-					aswang_ent.initFoodOrder(["Pandesal"])
-					break
-			else :
-				cust_col_ctr+=1
-				cust_col_ctr = clamp(cust_col_ctr,0,cust_column-1)
+	for i in 20 :
+		if arr_cust_line[cust_col_ctr].has(null) :
+			rand_row = int(rand_range(0,cust_row))
+			if arr_cust_line[cust_col_ctr][rand_row] == null :
+				arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
+				current_row = rand_row
+				aswang_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
+				call_deferred("add_child",aswang_ent)
+				aswang_ent.initFoodOrder(["Pandesal"])
+				break
+		else :
+			cust_col_ctr+=1
+			cust_col_ctr = clamp(cust_col_ctr,0,cust_column-1)
 				
-		var current_col = cust_col_ctr
 		
-		var destination_pos = Vector2()
-		match current_col:
-			0:
-				destination_pos.x = stall_position.x
-			1:
-				destination_pos.x = (screensize.x - stall_position.x)/3 + stall_position.x
-			2:
-				destination_pos.x = (2 * (screensize.x - stall_position.x)/3) + stall_position.x
-				
-		match current_row:
-			0:
-				destination_pos.y = 0
-			1:
-				destination_pos.y = screensize.y/4
-			2:
-				destination_pos.y = screensize.y/2
-			3:
-				destination_pos.y = 3 * screensize.y/4
-				
-		aswang_ent.set_position(Vector2(screensize.x,destination_pos.y+70))
-		aswang_ent.initPositions(destination_pos.x+100)
-		print(destination_pos)
+	var cust_index = GlobalVar.organize_line(cust_col_ctr,rand_row)
+	print(cust_col_ctr)
+	if rand_row == null:
+		rand_row = 0
+	arr_cust_line[cust_col_ctr][rand_row].set_position(Vector2(screensize.x,cust_index.y+70))
+	arr_cust_line[cust_col_ctr][rand_row].initPositions(cust_index.x+100)
+
+	
+func reassemble_line():
+	pass
+
+
+
+func _on_Aswangenemy_customer_satisfied():
+	print("uwu")
+	pass # Replace with function body.

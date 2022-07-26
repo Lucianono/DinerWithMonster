@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal customer_satisfied
+
 var speed = 10000
 var slope_vector
 var global_dest_pos_x = 0
@@ -27,7 +29,7 @@ func _physics_process(delta):
 	
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		position.x = clamp(position.x,global_dest_pos_x,screensize.x+100)
+		position.x = clamp(position.x,global_dest_pos_x,screensize.x+300)
 	
 	else :
 		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
@@ -41,6 +43,7 @@ func _physics_process(delta):
 			
 	if position.x - 200 > screensize.x :
 		queue_free()
+		print("cust freed")
 		
 
 
@@ -52,6 +55,7 @@ func _on_Area2D_area_entered(area):
 			print(global_dish_order)
 			
 			if global_dish_order == [] :
+				emit_signal("customer_satisfied")
 				speed *= -1
 				get_node("KineCollision").set_deferred("disabled", true)
 			
