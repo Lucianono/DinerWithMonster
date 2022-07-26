@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-signal customer_satisfied
+signal customer_satisfied(col,row)
 
 var speed = 10000
 var slope_vector
@@ -24,20 +24,21 @@ func _ready():
 	
 	set_physics_process(true)
 
+#initialize index from arr_cust_line
 func initCustIndex(col,row):
 	cust_col = col
 	cust_row = row
-
-func initPositions(dest_pos_x):
-	global_dest_pos_x = dest_pos_x
 	
+	line_pos = GlobalVar.organize_line(cust_col,cust_row)
+
+#initialize dish order
 func initFoodOrder(dish):
 	global_dish_order = dish
 	print(global_dish_order)
 	
 	
 func _physics_process(delta):
-	
+	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
 		position.x = clamp(position.x,line_pos.x+100,screensize.x+300)
@@ -52,12 +53,13 @@ func _physics_process(delta):
 		else:
 			move_and_slide(Vector2(-1,1) * slope_vector * speed * delta)
 			
+	# free when outside screen
 	if position.x - 200 > screensize.x :
 		queue_free()
 		print("cust freed")
 		
 
-
+#when a dish entered
 func _on_Area2D_area_entered(area):
 	if  area.is_in_group("dishes"):
 		
@@ -66,7 +68,7 @@ func _on_Area2D_area_entered(area):
 			print(global_dish_order)
 			
 			if global_dish_order == [] :
-				emit_signal("customer_satisfied")
+				emit_signal("customer_satisfied",cust_col,cust_row)
 				speed *= -1
 				get_node("KineCollision").set_deferred("disabled", true)
 			

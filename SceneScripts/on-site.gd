@@ -163,10 +163,15 @@ func customer_assign():
 	
 
 	
-func reassemble_line():
-	pass
+func reassemble_line(col,row):
+	if col < 2:
+		arr_cust_line[col][row] = arr_cust_line[col+1][row]
+		arr_cust_line[col+1][row] = null
+		if arr_cust_line[col][row] != null :
+			arr_cust_line[col][row].initCustIndex(col,row)
 
 
-
-func _on_Aswangenemy_customer_satisfied():
-	print("uwu")
+func _on_Aswangenemy_customer_satisfied(col,row):
+	arr_cust_line[col][row] = null
+	print(arr_cust_line)
+	reassemble_line(col,row)

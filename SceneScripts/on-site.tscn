@@ -57,3 +57,4 @@ position = Vector2( 86, -65 )
 [connection signal="field_entered" from="Field" to="." method="_on_Field_field_entered"]
 [connection signal="pond_entered" from="Pond" to="." method="_on_Pond_pond_entered"]
 [connection signal="player_cooking" from="Grill" to="." method="_on_Grill_player_cooking"]
+[connection signal="customer_satisfied" from="Aswang-enemy" to="." method="_on_Aswangenemy_customer_satisfied"]
