@@ -30,6 +30,8 @@ func getDishName():
 #when caldo picked the ingredient 
 func _on_dishready_area_entered(area):
 	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_dish_holding == null && GlobalVar.player_holding == []:	
+		set_deferred("monitoring",false)
+		set_deferred("monitorable",false)
 		isPlayerHolding = true
 		GlobalVar.player_dish_holding = global_dish_name
 	elif area.is_in_group("customers") : 
@@ -56,6 +58,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
+				set_deferred("monitoring",true)
+				set_deferred("monitorable",true)
 				
 				GlobalVar.player_dish_holding = null
 				isPlayerHolding = false

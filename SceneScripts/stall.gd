@@ -25,5 +25,6 @@ func _on_attack(atk):
 		print(hp)
 		if hp <= 0 :
 			queue_free()
+			set_deferred("disabled", true)
 
 

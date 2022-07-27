@@ -40,6 +40,7 @@ func getIngrName():
 func _on_ingredientdrop_area_entered(area):
 	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2 && GlobalVar.player_dish_holding == null:	
 		set_deferred("monitoring",false)
+		set_deferred("monitorable",false)
 		current_player_holding_size = GlobalVar.player_holding.size()
 		isPlayerHolding = true
 		GlobalVar.player_holding.append(global_ingr_name)
@@ -80,6 +81,7 @@ func _unhandled_input(event):
 		if event.button_index == BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
 				set_deferred("monitoring",true)
+				set_deferred("monitorable",true)
 				
 				GlobalVar.player_holding.clear()
 				isPlayerHolding = false

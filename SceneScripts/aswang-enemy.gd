@@ -101,7 +101,15 @@ func _on_Area2D_area_entered(area):
 		area_being_entered = area
 		Timer.start()
 		
+
+
 func atk_signal():
-	if area_being_entered.is_in_group("stalls"):
-		GlobalVar.emit_signal("attack",5)
+	print("timer")
+	if area_being_entered != null :
+		if area_being_entered.is_in_group("stalls"):
+			GlobalVar.emit_signal("attack",5)
+	else:
+		Timer.stop()
+	
 		
+
