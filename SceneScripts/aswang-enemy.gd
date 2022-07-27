@@ -66,7 +66,6 @@ func _physics_process(delta):
 func _on_Area2D_area_entered(area):
 	
 	if  area.is_in_group("dishes"):
-		
 		set_physics_process(true)
 		if global_dish_order.has(area.getDishName()):
 			global_dish_order.erase(area.getDishName())
@@ -79,10 +78,17 @@ func _on_Area2D_area_entered(area):
 				isPassive = true
 				line_pos *= 0
 				get_node("Area2D").set_deferred("monitoring", false)
+				get_node("Area2D").set_deferred("monitorable", false)
+		
+		else:
+			isPassive = false
 				
-	
-	elif area.is_in_group("ingredients") || area.is_in_group("dishes"):
+	elif area.is_in_group("ingredients"):
 		set_physics_process(true)
 		isPassive = false
-		print(area)
+		
+	#print (area)
+	if area.is_in_group("stalls"):
+		GlobalVar.emit_signal("attack",5)
+		print("uwa")
 		

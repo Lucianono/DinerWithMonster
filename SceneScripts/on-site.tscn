@@ -45,7 +45,7 @@ position = Vector2( 440, 50 )
 z_index = -1
 
 [node name="Aswang-enemy" parent="." groups=["customers"] instance=ExtResource( 12 )]
-position = Vector2( 86, -65 )
+position = Vector2( 1605, 48 )
 
 [node name="StallNodes" type="Node2D" parent="."]
 position = Vector2( 525, 0 )

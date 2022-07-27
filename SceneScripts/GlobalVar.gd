@@ -1,5 +1,7 @@
 extends Node
 
+signal attack(atk)
+
 var player_holding = []
 var player_dish_holding = null
 var isPlayerCooking = false

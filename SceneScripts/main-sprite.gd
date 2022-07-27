@@ -20,7 +20,7 @@ func _physics_process(_delta):
 	
 	#limits caldo position
 	position.y = clamp(position.y, 1 + sprite_extent.y, screensize.y - sprite_extent.y)
-	position.x = clamp(position.x, 1 + sprite_extent.x, screensize.x - sprite_extent.x)
+	position.x = clamp(position.x, 1 + sprite_extent.x, get_node("/root/Node2D/StallNodes").position.x - sprite_extent.x)
 	
 	
 	

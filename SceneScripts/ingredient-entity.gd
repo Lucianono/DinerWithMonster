@@ -39,11 +39,11 @@ func getIngrName():
 #when caldo picked the ingredient 
 func _on_ingredientdrop_area_entered(area):
 	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_holding.size() < 2 && GlobalVar.player_dish_holding == null:	
-		disconnect("area_entered",self,"_on_ingredientdrop_area_entered")
+		set_deferred("monitoring",false)
 		current_player_holding_size = GlobalVar.player_holding.size()
 		isPlayerHolding = true
 		GlobalVar.player_holding.append(global_ingr_name)
-	if area.is_in_group("customers") : 
+	elif area.is_in_group("customers") : 
 		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
 		
@@ -79,7 +79,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
-				connect("area_entered",self,"_on_ingredientdrop_area_entered")
+				set_deferred("monitoring",true)
 				
 				GlobalVar.player_holding.clear()
 				isPlayerHolding = false
