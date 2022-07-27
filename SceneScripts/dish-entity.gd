@@ -32,7 +32,8 @@ func _on_dishready_area_entered(area):
 	if area.get_name() == "caldo-area" && !isPlayerThrowing && GlobalVar.player_dish_holding == null && GlobalVar.player_holding == []:	
 		isPlayerHolding = true
 		GlobalVar.player_dish_holding = global_dish_name
-		
+	elif area.is_in_group("customers") : 
+		queue_free()
 
 func _process(delta):
 	#for smart holding and throwing

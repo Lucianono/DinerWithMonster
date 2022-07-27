@@ -14,7 +14,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["customers"]]
 scale = Vector2( 0.285, 0.285 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]

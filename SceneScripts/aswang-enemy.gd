@@ -17,6 +17,7 @@ var line_pos
 
 
 func _ready():
+	add_to_group("customers")
 	screensize = get_viewport_rect().size
 	
 	line_pos = GlobalVar.organize_line(cust_col,cust_row)

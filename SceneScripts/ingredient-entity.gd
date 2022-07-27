@@ -43,6 +43,10 @@ func _on_ingredientdrop_area_entered(area):
 		current_player_holding_size = GlobalVar.player_holding.size()
 		isPlayerHolding = true
 		GlobalVar.player_holding.append(global_ingr_name)
+	if area.is_in_group("customers") : 
+		emit_signal("ingredient_freed",global_ingr_name)
+		queue_free()
+	print(area)
 		
 
 func _process(delta):
@@ -76,6 +80,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
+				connect("area_entered",self,"_on_ingredientdrop_area_entered")
 				
 				GlobalVar.player_holding.clear()
 				isPlayerHolding = false
