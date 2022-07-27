@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://SceneScripts/on-site.gd" type="Script" id=1]
 [ext_resource path="res://SceneScripts/main-sprite.tscn" type="PackedScene" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://SceneScripts/dish-entity.tscn" type="PackedScene" id=10]
 [ext_resource path="res://SceneScripts/Background.tscn" type="PackedScene" id=11]
 [ext_resource path="res://SceneScripts/aswang-enemy.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 26, 333 )
 
 [node name="Node2D" type="Node"]
 script = ExtResource( 1 )
@@ -47,20 +50,23 @@ z_index = -1
 [node name="Aswang-enemy" parent="." groups=["customers"] instance=ExtResource( 12 )]
 position = Vector2( 1605, 48 )
 
-[node name="StallNodes" type="Node2D" parent="."]
-position = Vector2( 525, 0 )
+[node name="StallNodes" type="Area2D" parent="."]
+position = Vector2( 525, 300 )
 
 [node name="Stall-area" parent="StallNodes" instance=ExtResource( 3 )]
-position = Vector2( 0, 82 )
+position = Vector2( 0, -225 )
 
 [node name="Stall-area2" parent="StallNodes" instance=ExtResource( 3 )]
-position = Vector2( 0, 245 )
+position = Vector2( 0, -75 )
 
 [node name="Stall-area3" parent="StallNodes" instance=ExtResource( 3 )]
-position = Vector2( 0, 409 )
+position = Vector2( 0, 75 )
 
 [node name="Stall-area4" parent="StallNodes" instance=ExtResource( 3 )]
-position = Vector2( 0, 563 )
+position = Vector2( 0, 225 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StallNodes"]
+shape = SubResource( 1 )
 
 [connection signal="ingredient_freed" from="ingredient-drop" to="." method="_on_ingredientdrop_ingredient_freed"]
 [connection signal="dish_freed" from="dish-ready" to="." method="_on_dishready_dish_freed"]

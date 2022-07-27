@@ -105,11 +105,13 @@ func _on_Area2D_area_entered(area):
 
 func atk_signal():
 	print("timer")
-	if area_being_entered != null :
-		if area_being_entered.is_in_group("stalls"):
-			GlobalVar.emit_signal("attack",5)
-	else:
-		Timer.stop()
-	
+	if area_being_entered.is_in_group("stalls"):
+		GlobalVar.emit_signal("attack",5)
 		
 
+
+
+func _on_Area2D_area_exited(area):
+	if area.get_node("/root/Node2D/StallNodes"):
+		print("exit")
+		Timer.stop()

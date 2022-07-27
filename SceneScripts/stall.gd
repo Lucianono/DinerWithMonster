@@ -24,7 +24,7 @@ func _on_attack(atk):
 		hp -= atk
 		print(hp)
 		if hp <= 0 :
-			queue_free()
-			set_deferred("disabled", true)
+			hp = clamp (hp,0,20)
+			$CollisionShape2D.set_deferred("disabled", true)
 
 
