@@ -132,7 +132,7 @@ var current_col
 #for left clicking
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
+		if event.button_index == BUTTON_RIGHT :
 			if event.pressed:
 			
 				customer_assign()	

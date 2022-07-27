@@ -31,6 +31,7 @@ func initCustIndex(col,row):
 	cust_row = row
 	
 	line_pos = GlobalVar.organize_line(cust_col,cust_row)
+	set_physics_process(true)
 
 #initialize dish order
 func initFoodOrder(dish):
@@ -42,7 +43,8 @@ func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		position.x = clamp(position.x,line_pos.x+100,screensize.x+300)
+		if position.x <= line_pos.x+100 :
+			set_physics_process(false)
 	
 	else :
 		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
@@ -62,8 +64,10 @@ func _physics_process(delta):
 
 #when a dish entered
 func _on_Area2D_area_entered(area):
+	print(area)
 	if  area.is_in_group("dishes"):
 		
+		set_physics_process(true)
 		if global_dish_order.has(area.getDishName()):
 			global_dish_order.erase(area.getDishName())
 			print(global_dish_order)
@@ -72,5 +76,12 @@ func _on_Area2D_area_entered(area):
 				emit_signal("customer_satisfied",cust_col,cust_row)
 				speed *= -1
 				get_node("KineCollision").set_deferred("disabled", true)
-			
+				isPassive = true
+				line_pos *= 0
+	
+	elif area.is_in_group("ingredients"):
+		
+		set_physics_process(true)
+		isPassive = false
+		print("haa")
 		

@@ -33,6 +33,7 @@ func _on_dishready_area_entered(area):
 		isPlayerHolding = true
 		GlobalVar.player_dish_holding = global_dish_name
 	elif area.is_in_group("customers") : 
+		emit_signal("dish_freed",global_dish_name)
 		queue_free()
 
 func _process(delta):

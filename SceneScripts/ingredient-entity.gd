@@ -46,7 +46,6 @@ func _on_ingredientdrop_area_entered(area):
 	if area.is_in_group("customers") : 
 		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
-	print(area)
 		
 
 func _process(delta):
