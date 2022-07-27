@@ -27,7 +27,7 @@ func _ready():
 	field_position = get_node("Field").get_position()
 	pond_positon = get_node("Pond").get_position()
 	grill_postion = get_node("Grill").get_position()
-	stall_position = get_node("Stall-area").get_position()
+	stall_position = get_node("StallNodes").get_position()
 	GlobalVar.stall_position = stall_position
 	
 	randomize()
