@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 signal customer_satisfied(col,row)
 
+var Timer
+var area_being_entered
+
 var speed = 10000
 var slope_vector
 var global_dest_pos_x = 0
@@ -17,6 +20,11 @@ var line_pos
 
 
 func _ready():
+	Timer = get_node("Timer")
+	Timer.connect("timeout", self, "atk_signal")
+	Timer.set_wait_time(1)
+	
+	
 	add_to_group("customers")
 	screensize = get_viewport_rect().size
 	
@@ -62,6 +70,7 @@ func _physics_process(delta):
 		print("cust freed")
 		
 
+
 #when a dish entered
 func _on_Area2D_area_entered(area):
 	
@@ -89,6 +98,10 @@ func _on_Area2D_area_entered(area):
 		
 	#print (area)
 	if area.is_in_group("stalls"):
+		area_being_entered = area
+		Timer.start()
+		
+func atk_signal():
+	if area_being_entered.is_in_group("stalls"):
 		GlobalVar.emit_signal("attack",5)
-		print("uwa")
 		
