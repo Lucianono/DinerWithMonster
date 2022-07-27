@@ -64,7 +64,7 @@ func _physics_process(delta):
 
 #when a dish entered
 func _on_Area2D_area_entered(area):
-	print(area)
+	
 	if  area.is_in_group("dishes"):
 		
 		set_physics_process(true)
@@ -78,10 +78,11 @@ func _on_Area2D_area_entered(area):
 				get_node("KineCollision").set_deferred("disabled", true)
 				isPassive = true
 				line_pos *= 0
+				get_node("Area2D").set_deferred("monitoring", false)
+				
 	
-	elif area.is_in_group("ingredients"):
-		
+	elif area.is_in_group("ingredients") || area.is_in_group("dishes"):
 		set_physics_process(true)
 		isPassive = false
-		print("haa")
+		print(area)
 		
