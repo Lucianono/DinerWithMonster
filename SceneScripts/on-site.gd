@@ -164,13 +164,18 @@ func customer_assign():
 
 	
 func reassemble_line(col,row):
-	for i in cust_column - col:
-		print(i)
-		if col < 2:
-			if arr_cust_line[col+i+1][row] != null :
-				arr_cust_line[col+i][row] = arr_cust_line[col+i+1][row]
-				arr_cust_line[col+i+1][row] = null
-				arr_cust_line[col+i][row].initCustIndex(col+i+1,row)
+	
+	
+		if col < 2 && arr_cust_line[col+1][row] != null :
+				
+			arr_cust_line[col][row] = arr_cust_line[col+1][row]
+			arr_cust_line[col+1][row] = null
+			arr_cust_line[col][row].initCustIndex(col,row)
+				
+			if col < 1 && arr_cust_line[col+2][row] != null :
+					arr_cust_line[col+1][row] = arr_cust_line[col+2][row]
+					arr_cust_line[col+2][row] = null
+					arr_cust_line[col+1][row].initCustIndex(col+1,row)
 			
 
 
