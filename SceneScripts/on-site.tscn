@@ -50,7 +50,7 @@ z_index = -1
 [node name="Aswang-enemy" parent="." groups=["customers"] instance=ExtResource( 12 )]
 position = Vector2( 1605, 48 )
 
-[node name="StallNodes" type="Area2D" parent="."]
+[node name="StallNodes" type="Area2D" parent="." groups=["farm_set"]]
 position = Vector2( 525, 300 )
 
 [node name="Stall-area" parent="StallNodes" instance=ExtResource( 3 )]

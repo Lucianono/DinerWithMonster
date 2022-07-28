@@ -26,5 +26,6 @@ func _on_attack(atk):
 		if hp <= 0 :
 			hp = clamp (hp,0,20)
 			$CollisionShape2D.set_deferred("disabled", true)
+			$Area2D/Sprite.scale = Vector2(1,1)
 
 

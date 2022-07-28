@@ -112,6 +112,6 @@ func atk_signal():
 
 
 func _on_Area2D_area_exited(area):
-	if area.get_node("/root/Node2D/StallNodes"):
-		print("exit")
+	if area.is_in_group("farm_set"):
+		print("exit" , area)
 		Timer.stop()
