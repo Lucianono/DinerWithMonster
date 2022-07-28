@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 signal customer_satisfied(col,row)
 
-var Timer
+var Timer1
+var Timer2
 var area_being_entered
 
 var speed =7000
@@ -20,9 +21,12 @@ var line_pos
 
 
 func _ready():
-	Timer = get_node("Timer")
-	Timer.connect("timeout", self, "atk_signal")
-	Timer.set_wait_time(1)
+	Timer1 = get_node("Timer")
+	Timer1.connect("timeout", self, "atk_signal")
+	Timer1.set_wait_time(1)
+	Timer2 = get_node("Timer2")
+	Timer2.connect("timeout", self, "boredom_signal")
+	Timer2.set_wait_time(1)
 	
 	
 	add_to_group("customers")
@@ -32,6 +36,11 @@ func _ready():
 	position = Vector2(screensize.x,line_pos.y+70)
 	
 	set_physics_process(true)
+	
+	print(line_pos)
+	if line_pos.x > screensize.x+200:
+		print(line_pos)
+		position = Vector2(1400,1)
 
 #initialize index from arr_cust_line
 func initCustIndex(col,row):
@@ -53,6 +62,7 @@ func _physics_process(delta):
 		move_and_slide(Vector2(-1,0) * speed * delta)
 		if position.x <= line_pos.x+100 :
 			set_physics_process(false)
+			Timer2.start()
 	
 	else :
 		#exclusive behavior
@@ -100,19 +110,24 @@ func _on_Area2D_area_entered(area):
 	#print (area)
 	if area.is_in_group("farm_set"):
 		area_being_entered = area
-		Timer.start()
+		Timer1.start()
 
 #when farm exited to stop	
 func _on_Area2D_area_exited(area):
 	if area.is_in_group("farm_set"):
 		print("exit" , area)
-		Timer.stop()
+		Timer1.stop()
 
 #execute to attack farm
 func atk_signal():
 	if area_being_entered.is_in_group("farm_set"):
 		GlobalVar.emit_signal("attack",5)
 		
+#customer cant wait
+func boredom_signal():
+	set_physics_process(true)
+	isPassive = false
+
 
 
 
