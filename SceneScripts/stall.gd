@@ -28,16 +28,16 @@ func _on_attack(atk):
 		print(hp)
 		if hp <= 0 :
 			hp = clamp (hp,0,20)
-			farm_state(true , Vector2(1,1))
+			farm_state(true ,hp, Vector2(1,1))
 			
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and isPlayerClose and hp < 20:
 		if event.scancode == KEY_SPACE:
 			print("stall fixed")
-			farm_state(false , Vector2(1,2.5))
+			farm_state(false ,20, Vector2(1,2.5))
 			
-func farm_state(collision, scaleA):
-	hp=20
+func farm_state(collision,hpset, scaleA):
+	hp=hpset
 	$CollisionShape2D.set_deferred("disabled", collision)
 	$Area2D/Sprite.scale = scaleA
 
