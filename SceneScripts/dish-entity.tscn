@@ -4,7 +4,7 @@
 [ext_resource path="res://ImageAssets/64.PNG" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23, 25 )
+extents = Vector2( 11, 10 )
 
 [node name="dish-ready" type="Area2D"]
 script = ExtResource( 1 )

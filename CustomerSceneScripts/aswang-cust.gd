@@ -91,6 +91,7 @@ func _on_Area2D_area_entered(area):
 				get_node("Area2D").set_deferred("monitorable", false)
 		
 		else:
+			print("error")
 			isPassive = false
 				
 	elif area.is_in_group("ingredients"):
