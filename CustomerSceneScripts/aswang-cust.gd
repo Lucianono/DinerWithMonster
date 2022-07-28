@@ -13,7 +13,7 @@ var screensize
 
 var global_dish_order = []
 var isPassive = true
-var isAngry = false
+var isAngryable = true
 
 var cust_col
 var cust_row
@@ -37,9 +37,7 @@ func _ready():
 	
 	set_physics_process(true)
 	
-	print(line_pos)
 	if line_pos.x > screensize.x+200:
-		print(line_pos)
 		position = Vector2(1400,1)
 
 #initialize index from arr_cust_line
@@ -60,7 +58,8 @@ func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		if position.x <= line_pos.x+100 :
+		if position.x <= line_pos.x+100 and isAngryable:
+			
 			set_physics_process(false)
 			Timer2.start()
 	
@@ -101,7 +100,6 @@ func _on_Area2D_area_entered(area):
 				get_node("Area2D").set_deferred("monitorable", false)
 		
 		else:
-			print("error")
 			isPassive = false
 				
 	elif area.is_in_group("ingredients"):

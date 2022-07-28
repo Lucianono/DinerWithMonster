@@ -23,10 +23,10 @@ var line_pos
 func _ready():
 	Timer1 = get_node("Timer")
 	Timer1.connect("timeout", self, "atk_signal")
-	Timer1.set_wait_time(1)
+	Timer1.set_wait_time(.5)
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
-	Timer2.set_wait_time(1)
+	Timer2.set_wait_time(2)
 	
 	
 	add_to_group("customers")
@@ -37,9 +37,7 @@ func _ready():
 	
 	set_physics_process(true)
 	
-	print(line_pos)
 	if line_pos.x > screensize.x+200:
-		print(line_pos)
 		position = Vector2(1400,1)
 
 #initialize index from arr_cust_line
@@ -68,7 +66,6 @@ func _physics_process(delta):
 		#exclusive behavior
 		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
 		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
-		
 		#for smart following
 		if isPlayerOnRight:
 			move_and_slide(Vector2(1,-1) * slope_vector * speed * delta)
@@ -99,6 +96,7 @@ func _on_Area2D_area_entered(area):
 				line_pos *= 0
 				get_node("Area2D").set_deferred("monitoring", false)
 				get_node("Area2D").set_deferred("monitorable", false)
+				Timer2.stop()
 		
 		else:
 			isPassive = false
