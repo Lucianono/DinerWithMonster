@@ -26,13 +26,13 @@ var dest_pos
 func _ready():
 	Timer1 = get_node("Timer")
 	Timer1.connect("timeout", self, "atk_signal")
-	Timer1.set_wait_time(.8)
+	Timer1.set_wait_time(.5)
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
 	Timer2.set_wait_time(2)
 	Timer3 = get_node("Timer3")
 	Timer3.connect("timeout", self, "teleport_signal")
-	Timer3.set_wait_time(1)
+	Timer3.set_wait_time(2)
 	
 	
 	
@@ -113,7 +113,6 @@ func _on_Area2D_area_entered(area):
 	#print (area)
 	if area.is_in_group("farm_set"):
 		area_being_entered = area
-		Timer1.start()
 
 #when farm exited to stop	
 func _on_Area2D_area_exited(area):

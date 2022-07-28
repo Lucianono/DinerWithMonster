@@ -98,6 +98,7 @@ func _on_Area2D_area_entered(area):
 				line_pos *= 0
 				get_node("Area2D").set_deferred("monitoring", false)
 				get_node("Area2D").set_deferred("monitorable", false)
+				Timer2.stop()
 		
 		else:
 			isPassive = false

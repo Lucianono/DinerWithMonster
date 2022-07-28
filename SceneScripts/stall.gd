@@ -24,7 +24,6 @@ func _on_Area2D_area_exited(area):
 		isPlayerClose = false
 
 func _on_attack(atk):
-	print("	iyaaaaaaaaa")
 	if isCustAttacking:
 		hp -= atk
 		print(hp)
