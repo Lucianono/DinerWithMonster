@@ -4,6 +4,7 @@ signal customer_satisfied(col,row)
 
 var Timer1
 var Timer2
+var Timer3
 var area_being_entered
 
 var speed =7000
@@ -19,14 +20,20 @@ var cust_col
 var cust_row
 var line_pos
 
+var dest_pos
+
 
 func _ready():
 	Timer1 = get_node("Timer")
 	Timer1.connect("timeout", self, "atk_signal")
-	Timer1.set_wait_time(.5)
+	Timer1.set_wait_time(.8)
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
 	Timer2.set_wait_time(2)
+	Timer3 = get_node("Timer3")
+	Timer3.connect("timeout", self, "teleport_signal")
+	Timer3.set_wait_time(1)
+	
 	
 	
 	add_to_group("customers")
@@ -64,13 +71,9 @@ func _physics_process(delta):
 	
 	else :
 		#exclusive behavior
-		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
-		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
-		#for smart following
-		if isPlayerOnRight:
-			move_and_slide(Vector2(1,-1) * slope_vector * speed * delta)
-		else:
-			move_and_slide(Vector2(-1,1) * slope_vector * speed * delta)
+		dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
+		Timer3.start()
+		set_physics_process(false)
 			
 	# free when outside screen
 	if position.x - 200 > screensize.x :
@@ -81,7 +84,7 @@ func _physics_process(delta):
 
 #when a dish and farm entered
 func _on_Area2D_area_entered(area):
-	
+	print("enter" , area)
 	if  area.is_in_group("dishes"):
 		set_physics_process(true)
 		if global_dish_order.has(area.getDishName()):
@@ -97,6 +100,8 @@ func _on_Area2D_area_entered(area):
 				get_node("Area2D").set_deferred("monitoring", false)
 				get_node("Area2D").set_deferred("monitorable", false)
 				Timer2.stop()
+				Timer3.stop()
+				
 		
 		else:
 			isPassive = false
@@ -118,13 +123,21 @@ func _on_Area2D_area_exited(area):
 
 #execute to attack farm
 func atk_signal():
-	if area_being_entered.is_in_group("farm_set"):
-		GlobalVar.emit_signal("attack",5)
+	print("	iyaaaaaaaaa")
+	if area_being_entered != null :
+		if area_being_entered.is_in_group("farm_set"):
+			GlobalVar.emit_signal("attack",10)
 		
 #customer cant wait
 func boredom_signal():
 	set_physics_process(true)
 	isPassive = false
+	
+#customer cant wait
+func teleport_signal():
+	Timer1.start()
+	position = dest_pos
+	dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
 
 
 

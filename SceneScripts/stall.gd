@@ -11,6 +11,7 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
+	
 	if area.is_in_group("customers") :
 		isCustAttacking = true
 	if area.get_name() == "caldo-area":
@@ -23,6 +24,7 @@ func _on_Area2D_area_exited(area):
 		isPlayerClose = false
 
 func _on_attack(atk):
+	print("	iyaaaaaaaaa")
 	if isCustAttacking:
 		hp -= atk
 		print(hp)
