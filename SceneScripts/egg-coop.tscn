@@ -9,10 +9,10 @@ extents = Vector2( 39, 43 )
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 43, 37 )
 
-[node name="Coop" type="StaticBody2D"]
+[node name="Coop" type="StaticBody2D" groups=["farm_set"]]
 script = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["farm_set"]]
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
 scale = Vector2( 0.284768, 0.284768 )
@@ -26,3 +26,4 @@ position = Vector2( 0, -10 )
 shape = SubResource( 1 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

@@ -97,15 +97,14 @@ func _on_Area2D_area_entered(area):
 		isPassive = false
 		
 	#print (area)
-	if area.is_in_group("stalls"):
+	if area.is_in_group("farm_set"):
 		area_being_entered = area
 		Timer.start()
 		
 
 
 func atk_signal():
-	print("timer")
-	if area_being_entered.is_in_group("stalls"):
+	if area_being_entered.is_in_group("farm_set"):
 		GlobalVar.emit_signal("attack",5)
 		
 
