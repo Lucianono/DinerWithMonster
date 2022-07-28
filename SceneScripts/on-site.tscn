@@ -11,7 +11,7 @@
 [ext_resource path="res://SceneScripts/magical-grill.tscn" type="PackedScene" id=9]
 [ext_resource path="res://SceneScripts/dish-entity.tscn" type="PackedScene" id=10]
 [ext_resource path="res://SceneScripts/Background.tscn" type="PackedScene" id=11]
-[ext_resource path="res://SceneScripts/aswang-enemy.tscn" type="PackedScene" id=12]
+[ext_resource path="res://CustomerSceneScripts/aswang-cust.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 333 )

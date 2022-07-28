@@ -5,7 +5,7 @@ var isCustAttacking = false
 var isPlayerClose = false
 
 func _ready():
-	GlobalVar.connect("attack",self,"_on_attack")
+	var _x = GlobalVar.connect("attack",self,"_on_attack")
 	pass
 
 

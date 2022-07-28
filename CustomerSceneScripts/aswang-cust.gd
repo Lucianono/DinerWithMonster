@@ -5,7 +5,7 @@ signal customer_satisfied(col,row)
 var Timer
 var area_being_entered
 
-var speed = 10000
+var speed =7000
 var slope_vector
 var global_dest_pos_x = 0
 var screensize
@@ -55,6 +55,7 @@ func _physics_process(delta):
 			set_physics_process(false)
 	
 	else :
+		#exclusive behavior
 		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
 		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
 		
@@ -71,7 +72,7 @@ func _physics_process(delta):
 		
 
 
-#when a dish entered
+#when a dish and farm entered
 func _on_Area2D_area_entered(area):
 	
 	if  area.is_in_group("dishes"):
@@ -100,9 +101,14 @@ func _on_Area2D_area_entered(area):
 	if area.is_in_group("farm_set"):
 		area_being_entered = area
 		Timer.start()
-		
 
+#when farm exited to stop	
+func _on_Area2D_area_exited(area):
+	if area.is_in_group("farm_set"):
+		print("exit" , area)
+		Timer.stop()
 
+#execute to attack farm
 func atk_signal():
 	if area_being_entered.is_in_group("farm_set"):
 		GlobalVar.emit_signal("attack",5)
@@ -110,7 +116,3 @@ func atk_signal():
 
 
 
-func _on_Area2D_area_exited(area):
-	if area.is_in_group("farm_set"):
-		print("exit" , area)
-		Timer.stop()

@@ -119,7 +119,8 @@ func _on_dishready_dish_freed(_dish_name_freed):
 #====================================
 #Customer Line
 
-onready var aswang = preload ("res://SceneScripts/aswang-enemy.tscn")
+onready var aswang = preload ("res://CustomerSceneScripts/aswang-cust.tscn")
+onready var whitelady = preload ("res://CustomerSceneScripts/whitelady-cust.tscn")
 var arr_cust_line = []
 var cust_col_ctr = 0
 var stall_position
@@ -141,19 +142,20 @@ func _unhandled_input(event):
 				
 func customer_assign():
 	randomize()
-	var aswang_ent = aswang.instance()
+	var cust_arr = [aswang.instance(),whitelady.instance()]
+	var cust_ent = cust_arr[int(rand_range(0,2))]
 	var rand_row
 				
 	for i in 20 :
 		if arr_cust_line[cust_col_ctr].has(null) :
 			rand_row = int(rand_range(0,cust_row))
 			if arr_cust_line[cust_col_ctr][rand_row] == null :
-				arr_cust_line[cust_col_ctr][rand_row] = aswang_ent
+				arr_cust_line[cust_col_ctr][rand_row] = cust_ent
 				current_row = rand_row
-				aswang_ent.initCustIndex(cust_col_ctr,rand_row)
-				aswang_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
-				call_deferred("add_child",aswang_ent)
-				aswang_ent.initFoodOrder(["Pandesal"])
+				cust_ent.initCustIndex(cust_col_ctr,rand_row)
+				cust_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
+				call_deferred("add_child",cust_ent)
+				cust_ent.initFoodOrder(["Pandesal"])
 				break
 		else :
 			cust_col_ctr+=1
