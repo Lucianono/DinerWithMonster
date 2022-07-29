@@ -177,10 +177,8 @@ func reassemble_line(col,row):
 	cust_col_ctr = col
 				
 				
-			
-
 
 func _on_Aswangenemy_customer_satisfied(col,row):
-	arr_cust_line[col][row] = null
 	#print(arr_cust_line)
+	arr_cust_line[col][row] = null
 	reassemble_line(col,row)
