@@ -3,6 +3,7 @@ extends Node
 signal attack(atk)
 
 var total_repair_points
+onready var repair_label = get_node("/root/Node2D/HUD/Label")
 
 var player_holding = []
 var player_dish_holding = null
@@ -11,15 +12,20 @@ var isPlayerCooking = false
 var screensize
 var stall_position
 
+var repair_timer
+
 func _ready():
+	repair_timer = get_node("/root/GlobalScene/Timer")
+	repair_timer.start()
 	total_repair_points = 100
+	repair_label.set_text("Repair Points : " + str(total_repair_points))
+	
 	screensize = get_viewport().size
-	set_process(false)
+	set_physics_process(false)
 	pass
 
-func _process(_delta):
-	print(player_holding)
-	
+func _physics_process(delta):
+	pass
 	
 func slope_calculate(first_pos,last_pos):
 	#warning divided by 0
@@ -56,6 +62,18 @@ func organize_line(col,row):
 	return(destination_pos)
 
 func repair_farm(hpmax,hpcurr):
-	get_node("/root/Node2D/HUD/Label").set_text("Repair Points : " + str(total_repair_points))
 	total_repair_points -= hpmax - hpcurr
-	return total_repair_points
+	repair_label.set_text("Repair Points : " + str(total_repair_points))
+
+
+
+func rp_add_pts():
+	print(total_repair_points)
+	if total_repair_points < 100 :
+		print("iya2")
+		total_repair_points += 1
+		repair_label.set_text("Repair Points : " + str(total_repair_points))
+
+
+func rp_timer_signal():
+	rp_add_pts()
