@@ -121,6 +121,7 @@ func _on_dishready_dish_freed(_dish_name_freed):
 
 onready var aswang = preload ("res://CustomerSceneScripts/aswang-cust.tscn")
 onready var whitelady = preload ("res://CustomerSceneScripts/whitelady-cust.tscn")
+onready var tyanak = preload ("res://CustomerSceneScripts/tyanak-cust.tscn")
 var arr_cust_line = []
 var cust_col_ctr = 0
 var stall_position
@@ -142,7 +143,7 @@ func _unhandled_input(event):
 				
 func customer_assign():
 	randomize()
-	var cust_arr = [aswang.instance(),whitelady.instance()]
+	var cust_arr = [aswang.instance(),whitelady.instance(),tyanak.instance()]
 	var cust_ent = cust_arr[int(rand_range(0,cust_arr.size()))]
 	var rand_row
 				
