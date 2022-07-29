@@ -4,9 +4,12 @@ signal customer_satisfied(col,row)
 
 var Timer1
 var Timer2
+var Timer3
 var area_being_entered
 
 var speed =7000
+var bullet_speed =1000
+var bullet_pos
 var slope_vector
 var global_dest_pos_x = 0
 var screensize
@@ -27,6 +30,9 @@ func _ready():
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
 	Timer2.set_wait_time(1)
+	Timer3 = get_node("Timer3")
+	Timer3.connect("timeout", self, "shoot_signal")
+	Timer3.set_wait_time(1)
 	
 	
 	add_to_group("customers")
@@ -60,21 +66,19 @@ func _physics_process(delta):
 		move_and_slide(Vector2(-1,0) * speed * delta)
 		if position.x <= line_pos.x+100 and isAngryable:
 			
-			set_physics_process(false)
+			
 			Timer2.start()
 	
 	else :
 		#exclusive behavior
-		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
-		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
-		
-		#for smart following
-		if isPlayerOnRight:
-			move_and_slide(Vector2(1,-1) * slope_vector * speed * delta)
-		else:
-			move_and_slide(Vector2(-1,1) * slope_vector * speed * delta)
+		$Bullet.set_position($Bullet.position + Vector2(-1,1) * slope_vector * bullet_speed * delta)
 			
 	# free when outside screen
+	if position.x - 200 > screensize.x :
+		queue_free()
+		print("cust freed")
+		
+	# bullet return
 	if position.x - 200 > screensize.x :
 		queue_free()
 		print("cust freed")
@@ -99,24 +103,23 @@ func _on_Area2D_area_entered(area):
 				get_node("Area2D").set_deferred("monitoring", false)
 				get_node("Area2D").set_deferred("monitorable", false)
 				Timer2.stop()
+				Timer3.stop()
+				$Bullet.queue_free()
 		
 		else:
-			isPassive = false
+			cust_angry()
 				
 	elif area.is_in_group("ingredients"):
+		cust_angry()
+		
+
+func cust_angry():
+	if isPassive == true : 	
+		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
 		set_physics_process(true)
 		isPassive = false
-		
-	#print (area)
-	if area.is_in_group("farm_set"):
-		area_being_entered = area
-		Timer1.start()
-
-#when farm exited to stop	
-func _on_Area2D_area_exited(area):
-	if area.is_in_group("farm_set"):
-		print("exit" , area)
-		Timer1.stop()
+		bullet_pos = $Bullet.position
+		Timer3.start()
 
 #execute to attack farm
 func atk_signal():
@@ -125,8 +128,18 @@ func atk_signal():
 
 #customer cant wait
 func boredom_signal():
+	cust_angry()
+
+#customer shoots
+func shoot_signal():
+	slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
+	$Bullet.position = bullet_pos
 	set_physics_process(true)
-	isPassive = false
 
 
 
+
+func _on_Bullet_area_entered(area):
+	if area.is_in_group("farm_set"):
+		area_being_entered = area
+		atk_signal()
