@@ -67,13 +67,16 @@ func repair_farm(hpmax,hpcurr):
 
 
 
+#===============
+#wat
 func rp_add_pts():
-	print(total_repair_points)
-	if total_repair_points < 100 :
+	print(GlobalVar.total_repair_points)
+	if GlobalVar.total_repair_points < 100 :
 		print("iya2")
-		total_repair_points += 1
-		repair_label.set_text("Repair Points : " + str(total_repair_points))
+		GlobalVar.total_repair_points += 1
+		repair_label.set_text("Repair Points : " + str(GlobalVar.total_repair_points))
 
 
 func rp_timer_signal():
+	print("total_repair_points")
 	rp_add_pts()
