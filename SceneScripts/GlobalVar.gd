@@ -2,6 +2,8 @@ extends Node
 
 signal attack(atk)
 
+var total_repair_points
+
 var player_holding = []
 var player_dish_holding = null
 var isPlayerCooking = false
@@ -10,6 +12,7 @@ var screensize
 var stall_position
 
 func _ready():
+	total_repair_points = 100
 	screensize = get_viewport().size
 	set_process(false)
 	pass
@@ -51,3 +54,8 @@ func organize_line(col,row):
 			destination_pos.y = -200
 				
 	return(destination_pos)
+
+func repair_farm(hpmax,hpcurr):
+	get_node("/root/Node2D/HUD/Label").set_text("Repair Points : " + str(total_repair_points))
+	total_repair_points -= hpmax - hpcurr
+	return total_repair_points

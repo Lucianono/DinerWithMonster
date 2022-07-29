@@ -182,3 +182,8 @@ func _on_Aswangenemy_customer_satisfied(col,row):
 	#print(arr_cust_line)
 	arr_cust_line[col][row] = null
 	reassemble_line(col,row)
+
+
+#====================================
+#HUD
+onready var repair_p = get_node("HUD/Label")

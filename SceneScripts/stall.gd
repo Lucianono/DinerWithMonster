@@ -32,10 +32,12 @@ func _on_attack(atk):
 			farm_state(true ,hp, Vector2(1,1))
 			
 func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and isPlayerClose and hp < 20:
+	if event is InputEventKey and event.pressed and isPlayerClose and hp < 20  and GlobalVar.total_repair_points >= hp:
 		if event.scancode == KEY_SPACE:
-			print("stall fixed")
+			print(get_name()," fixed")
+			GlobalVar.repair_farm(20, hp)
 			farm_state(false ,20, Vector2(1,2.5))
+			print(GlobalVar.total_repair_points)
 			
 func farm_state(collision,hpset, scaleA):
 	hp=hpset
