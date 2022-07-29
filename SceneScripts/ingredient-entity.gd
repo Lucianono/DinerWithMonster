@@ -44,7 +44,7 @@ func _on_ingredientdrop_area_entered(area):
 		current_player_holding_size = GlobalVar.player_holding.size()
 		isPlayerHolding = true
 		GlobalVar.player_holding.append(global_ingr_name)
-	elif area.is_in_group("customers") : 
+	elif area.is_in_group("customers") and !area.is_in_group("bullet"): 
 		emit_signal("ingredient_freed",global_ingr_name)
 		queue_free()
 		

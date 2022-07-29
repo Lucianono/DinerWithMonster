@@ -34,7 +34,7 @@ one_shot = true
 
 [node name="Timer3" type="Timer" parent="."]
 
-[node name="Bullet" type="Area2D" parent="." groups=["customers"]]
+[node name="Bullet" type="Area2D" parent="." groups=["bullet", "customers"]]
 
 [node name="Sprite" type="Sprite" parent="Bullet"]
 position = Vector2( 65, 0 )

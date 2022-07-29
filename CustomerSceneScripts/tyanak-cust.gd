@@ -8,7 +8,7 @@ var Timer3
 var area_being_entered
 
 var speed =7000
-var bullet_speed =1000
+var bullet_speed =700
 var bullet_pos
 var slope_vector
 var global_dest_pos_x = 0
@@ -32,7 +32,7 @@ func _ready():
 	Timer2.set_wait_time(1)
 	Timer3 = get_node("Timer3")
 	Timer3.connect("timeout", self, "shoot_signal")
-	Timer3.set_wait_time(1)
+	Timer3.set_wait_time(3)
 	
 	
 	add_to_group("customers")
@@ -64,9 +64,9 @@ func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		if position.x <= line_pos.x+100 and isAngryable:
+		if position.x <= line_pos.x+100 :
 			
-			
+			set_physics_process(false)
 			Timer2.start()
 	
 	else :
@@ -115,11 +115,13 @@ func _on_Area2D_area_entered(area):
 
 func cust_angry():
 	if isPassive == true : 	
+		position.x -= 50
 		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
 		set_physics_process(true)
 		isPassive = false
 		bullet_pos = $Bullet.position
 		Timer3.start()
+		get_node("KineCollision").set_deferred("disabled", true)
 
 #execute to attack farm
 func atk_signal():
@@ -143,3 +145,4 @@ func _on_Bullet_area_entered(area):
 	if area.is_in_group("farm_set"):
 		area_being_entered = area
 		atk_signal()
+		#$Bullet.position = bullet_pos
