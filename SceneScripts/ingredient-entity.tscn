@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://SceneScripts/ingredient-entity.gd" type="Script" id=1]
-[ext_resource path="res://ImageAssets/a2.png" type="Texture" id=2]
+[ext_resource path="res://ImageAssets/egg_ingr.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23, 25 )
+extents = Vector2( 19, 24 )
 
 [node name="ingredient-drop" type="Area2D" groups=["ingredients"]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.152318, 0.152318 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
