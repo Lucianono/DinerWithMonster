@@ -17,7 +17,7 @@ var repair_timer
 func _ready():
 	repair_timer = get_node("/root/GlobalScene/Timer")
 	repair_timer.start()
-	total_repair_points = 100
+	total_repair_points = 1
 	repair_label.set_text("Repair Points : " + str(total_repair_points))
 	
 	screensize = get_viewport().size
@@ -61,6 +61,7 @@ func organize_line(col,row):
 				
 	return(destination_pos)
 
+
 func repair_farm(hpmax,hpcurr):
 	total_repair_points -= hpmax - hpcurr
 	repair_label.set_text("Repair Points : " + str(total_repair_points))
@@ -70,13 +71,10 @@ func repair_farm(hpmax,hpcurr):
 #===============
 #wat
 func rp_add_pts():
-	print(GlobalVar.total_repair_points)
 	if GlobalVar.total_repair_points < 100 :
-		print("iya2")
 		GlobalVar.total_repair_points += 1
 		repair_label.set_text("Repair Points : " + str(GlobalVar.total_repair_points))
 
 
 func rp_timer_signal():
-	print("total_repair_points")
 	rp_add_pts()

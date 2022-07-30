@@ -8,7 +8,7 @@ var Timer3
 var area_being_entered
 
 var speed =7000
-var bullet_speed =700
+var bullet_speed =300
 var bullet_pos
 var slope_vector
 var global_dest_pos_x = 0
@@ -125,8 +125,7 @@ func cust_angry():
 
 #execute to attack farm
 func atk_signal():
-	if area_being_entered.is_in_group("farm_set"):
-		GlobalVar.emit_signal("attack",5)
+	GlobalVar.emit_signal("attack",5)
 
 #customer cant wait
 func boredom_signal():
@@ -142,7 +141,8 @@ func shoot_signal():
 
 
 func _on_Bullet_area_entered(area):
+	print("uwaaa")
 	if area.is_in_group("farm_set"):
-		area_being_entered = area
+		print("uwaaa2")
 		atk_signal()
 		#$Bullet.position = bullet_pos

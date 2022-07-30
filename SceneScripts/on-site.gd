@@ -144,7 +144,7 @@ func _unhandled_input(event):
 func customer_assign():
 	randomize()
 	var cust_arr = [aswang.instance(),whitelady.instance(),tyanak.instance()]
-	var cust_ent = cust_arr[int(rand_range(0,cust_arr.size()))]
+	var cust_ent = cust_arr[int(rand_range(2,cust_arr.size()))]
 	var rand_row
 				
 	for i in 20 :

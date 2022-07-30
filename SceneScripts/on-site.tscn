@@ -14,7 +14,7 @@
 [ext_resource path="res://CustomerSceneScripts/aswang-cust.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 26, 333 )
+extents = Vector2( 27, 310 )
 
 [node name="Node2D" type="Node"]
 script = ExtResource( 1 )
