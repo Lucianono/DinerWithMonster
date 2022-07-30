@@ -6,6 +6,7 @@ var isPlayerClose = false
 onready var health_bar = $ProgressBar
 
 func _ready():
+	health_bar.visible = false
 	var _x = GlobalVar.connect("attack",self,"_on_attack")
 	health_bar.value = hp
 	pass
@@ -28,6 +29,7 @@ func _on_Area2D_area_exited(area):
 #atk signal from customers
 func _on_attack(atk):
 	if isCustAttacking and hp>0:
+		health_bar.visible = true
 		hp -= atk
 		if hp <= 0 :
 			hp=0
@@ -42,6 +44,7 @@ func _unhandled_input(event):
 			print(get_name()," fixed")
 			GlobalVar.repair_farm(20, hp)
 			farm_state(false ,20, Vector2(1,2.5))
+			health_bar.visible = false
 
 #to change farm state	
 func farm_state(collision,hpset, scaleA):
