@@ -23,6 +23,7 @@ var line_pos
 var dest_pos
 
 
+
 func _ready():
 	Timer1 = get_node("Timer")
 	Timer1.connect("timeout", self, "atk_signal")
@@ -71,9 +72,13 @@ func _physics_process(delta):
 	
 	else :
 		#exclusive behavior
-		dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
+		if GlobalVar.countStallDestroyed > 0 :
+			dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
+		else :
+			dest_pos = get_node("/root/Node2D/StallNodes").get_position()
 		Timer3.start()
 		set_physics_process(false)
+			
 			
 	# free when outside screen
 	if position.x - 200 > screensize.x :
@@ -135,8 +140,14 @@ func boredom_signal():
 #customer cant wait
 func teleport_signal():
 	Timer1.start()
-	position = dest_pos
-	dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
+	
+	if GlobalVar.countStallDestroyed > 0 :
+		position = dest_pos
+		dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
+	else :
+		position.x = dest_pos.x
+		dest_pos = get_node("/root/Node2D/StallNodes").get_position()
+		
 
 
 

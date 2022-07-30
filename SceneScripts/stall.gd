@@ -9,7 +9,6 @@ func _ready():
 	health_bar.visible = false
 	var _x = GlobalVar.connect("attack",self,"_on_attack")
 	health_bar.value = hp
-	pass
 
 
 
@@ -34,7 +33,8 @@ func _on_attack(atk):
 		if hp <= 0 :
 			hp=0
 			print(hp)
-			farm_state(true ,hp, Vector2(1,1))
+			farm_state(true ,hp)
+			GlobalVar.countStallDestroyed += 1
 		health_bar.value = hp
 	
 #spacebar to fix		
@@ -43,15 +43,15 @@ func _unhandled_input(event):
 		if event.scancode == KEY_SPACE:
 			print(get_name()," fixed")
 			GlobalVar.repair_farm(20, hp)
-			farm_state(false ,20, Vector2(1,2.5))
+			farm_state(false ,20)
 			health_bar.visible = false
+			GlobalVar.countStallDestroyed -= 1
 
 #to change farm state	
-func farm_state(collision,hpset, scaleA):
+func farm_state(collision,hpset):
 	hp=hpset
 	health_bar.value = hp
 	$CollisionShape2D.set_deferred("disabled", collision)
-	$Area2D/Sprite.scale = scaleA
 
 
 

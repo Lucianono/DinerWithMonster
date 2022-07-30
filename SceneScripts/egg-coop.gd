@@ -7,8 +7,12 @@ var isCustAttacking = false
 var isPlayerClose = false
 var isFarmDestroyed = false
 
+onready var health_bar = $ProgressBar
+
 func _ready():
+	health_bar.visible = false
 	var _x = GlobalVar.connect("attack",self,"_on_attack")
+	health_bar.value = hp
 
 #when caldo touch coop
 func _on_Area2D_area_entered(area):
@@ -26,22 +30,28 @@ func _on_Area2D_area_exited(area):
 		print("exit")
 		isPlayerClose = false
 
+#atk signal from customers
 func _on_attack(atk):
-	if isCustAttacking:
+	if isCustAttacking and hp>0:
+		health_bar.visible = true
 		hp -= atk
-		print(hp)
 		if hp <= 0 :
-			hp = clamp (hp,0,20)
-			farm_state(true , hp , Vector2(0.2,0.2))
-			
+			hp=0
+			print(hp)
+			farm_state(true ,hp)
+		health_bar.value = hp
+	
+#spacebar to fix		
 func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and isPlayerClose and hp < 20:
+	if event is InputEventKey and event.pressed and isPlayerClose and hp < 20  and GlobalVar.total_repair_points >= (20-hp):
 		if event.scancode == KEY_SPACE:
-			print("stall fixed")
-			farm_state(false  , 20, Vector2(0.285,0.285))
+			print(get_name()," fixed")
+			GlobalVar.repair_farm(20, hp)
+			farm_state(false ,20)
+			health_bar.visible = false
 			
-func farm_state(collision , hpset, scaleA):
+func farm_state(collision , hpset):
 	hp=hpset
 	$CollisionShape2D.set_deferred("disabled", collision)
 	isFarmDestroyed = collision
-	$Area2D/Sprite.scale = scaleA
+	health_bar.value = hp

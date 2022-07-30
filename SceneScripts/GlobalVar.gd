@@ -13,11 +13,12 @@ var screensize
 var stall_position
 
 var repair_timer
+var countStallDestroyed = 0
 
 func _ready():
 	repair_timer = get_node("/root/GlobalScene/Timer")
 	repair_timer.start()
-	total_repair_points = 1
+	total_repair_points = 100
 	repair_label.set_text("Repair Points : " + str(total_repair_points))
 	
 	screensize = get_viewport().size
