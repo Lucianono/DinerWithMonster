@@ -8,7 +8,7 @@ var Timer3
 var area_being_entered
 
 var speed =7000
-var bullet_speed =300
+var bullet_speed =700
 var bullet_pos
 var slope_vector
 var global_dest_pos_x = 0
