@@ -21,6 +21,27 @@ func _ready():
 #for initializing the ingredient tyoe
 func initDishName(dish_name):
 	global_dish_name = dish_name
+	match global_dish_name :
+		"Adobo" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/adobo_dish.png"))
+		"Pandesal" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/pandesal_dish.png"))
+		"Balot" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/balot_dish.png"))
+		"Betamax" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/betamax_dish.png"))
+		"MeatBalls" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/mball_dish.png"))
+		"Relleno" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/relleno_dish.png"))
+		"Sisig" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/sisig_dish.png"))
+		"SquidBalls" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/sball_dish.png"))
+		"Tokneneng" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/tokneneng_dish.png"))
+		"Calamares" :
+			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/calamares_dish.png"))
 	print(dish_name)
 
 #for getting the ingredient type

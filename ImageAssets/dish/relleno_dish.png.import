@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/64.PNG-2387e063429a26f7c238f1f1eafc75ad.stex"
+path="res://.import/relleno_dish.png-5d8d3b2368ae1ff76a1e0288c6b509c4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ImageAssets/64.PNG"
-dest_files=[ "res://.import/64.PNG-2387e063429a26f7c238f1f1eafc75ad.stex" ]
+source_file="res://ImageAssets/dish/relleno_dish.png"
+dest_files=[ "res://.import/relleno_dish.png-5d8d3b2368ae1ff76a1e0288c6b509c4.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
