@@ -29,7 +29,7 @@ func _ready():
 	Timer1.set_wait_time(1)
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
-	Timer2.set_wait_time(1)
+	Timer2.set_wait_time(6)
 	Timer3 = get_node("Timer3")
 	Timer3.connect("timeout", self, "shoot_signal")
 	Timer3.set_wait_time(3)

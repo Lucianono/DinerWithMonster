@@ -26,7 +26,7 @@ func _ready():
 	Timer1.set_wait_time(1)
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
-	Timer2.set_wait_time(1)
+	Timer2.set_wait_time(5)
 	
 	
 	add_to_group("customers")

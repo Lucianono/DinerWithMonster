@@ -7,6 +7,7 @@
 extents = Vector2( 19, 24 )
 
 [node name="ingredient-drop" type="Area2D" groups=["ingredients"]]
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
