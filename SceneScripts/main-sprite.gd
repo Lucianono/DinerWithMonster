@@ -3,7 +3,7 @@ extends KinematicBody2D
 var kboard = Vector2(0,0)
 var screensize
 var sprite_extent
-export var speed = 500
+export var speed = 100
 
 func _ready():
 	sprite_extent = get_node("caldo-area/Sprite").get_texture().get_size()/2

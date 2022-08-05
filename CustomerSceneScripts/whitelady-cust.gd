@@ -7,7 +7,7 @@ var Timer2
 var Timer3
 var area_being_entered
 
-var speed =7000
+var speed =3500
 var slope_vector
 var global_dest_pos_x = 0
 var screensize
@@ -38,10 +38,10 @@ func _ready():
 	
 	
 	add_to_group("customers")
-	screensize = get_viewport_rect().size
+	screensize = get_viewport().get_visible_rect().size
 	
 	line_pos = GlobalVar.organize_line(cust_col,cust_row)
-	position = Vector2(screensize.x,line_pos.y+70)
+	position = Vector2(screensize.x,line_pos.y+10)
 	
 	set_physics_process(true)
 	
@@ -66,7 +66,7 @@ func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		if position.x <= line_pos.x+100 :
+		if position.x <= line_pos.x+40  :
 			set_physics_process(false)
 			Timer2.start()
 	

@@ -20,7 +20,7 @@ var cust_column = 3
 var cust_row = 4
 
 func _ready():
-	screensize = get_viewport().size
+	screensize = get_viewport().get_visible_rect().size
 
 	coop_position = get_node("Coop").get_position()
 	butcher_position = get_node("Butcher").get_position()
@@ -47,7 +47,7 @@ func _on_Coop_coop_entered():
 		ingr_ent.initIngrName("egg")
 		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
 		call_deferred("add_child",ingr_ent)
-		ingr_ent.set_position(coop_position + Vector2(20,50))
+		ingr_ent.set_position(coop_position + Vector2(10,25))
 		isEggFreed = false
 		
 #when butcher touched (signal)
@@ -58,7 +58,7 @@ func _on_Butcher_butcher_entered():
 		ingr_ent.initIngrName("pork")
 		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
 		call_deferred("add_child",ingr_ent)
-		ingr_ent.set_position(butcher_position + Vector2(20,-50))
+		ingr_ent.set_position(butcher_position + Vector2(10,-25))
 		isPorkFreed = false
 		
 #when field touched (signal)
@@ -69,7 +69,7 @@ func _on_Field_field_entered():
 		ingr_ent.initIngrName("wheat")
 		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
 		call_deferred("add_child",ingr_ent)
-		ingr_ent.set_position(field_position + Vector2(20,-50))
+		ingr_ent.set_position(field_position + Vector2(10,-25))
 		isWheatFreed = false
 
 #when pond touched (signal)
@@ -80,7 +80,7 @@ func _on_Pond_pond_entered():
 		ingr_ent.initIngrName("squid")
 		ingr_ent.connect("ingredient_freed",self,"_on_ingredientdrop_ingredient_freed")
 		call_deferred("add_child",ingr_ent)
-		ingr_ent.set_position(pond_positon + Vector2(20,50))
+		ingr_ent.set_position(pond_positon + Vector2(10,25))
 		isSquidFreed = false
 
 #when ingredient freed
@@ -109,7 +109,7 @@ func _on_Grill_player_cooking(dish_name_created):
 		dish_ent.connect("dish_freed",self,"_on_dishready_dish_freed")
 		call_deferred("add_child",dish_ent)
 		randomize()
-		dish_ent.set_position(grill_postion + Vector2(rand_range(-20,-30),rand_range(0,60)))
+		dish_ent.set_position(grill_postion + Vector2(rand_range(-10,-15),rand_range(0,30)))
 	
 #when dish freed
 func _on_dishready_dish_freed(_dish_name_freed):

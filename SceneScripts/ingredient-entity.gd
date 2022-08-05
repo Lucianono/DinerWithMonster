@@ -7,8 +7,8 @@ var isPlayerThrowing = false
 var isClickOnRight = true
 var global_ingr_name = null
 
-var hold_pos = 50
-var speed = 1000
+var hold_pos = 20
+var speed = 500
 
 var screensize
 var slope_vector

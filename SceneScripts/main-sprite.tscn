@@ -7,7 +7,7 @@
 extents = Vector2( 12, 21 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 16 )
+extents = Vector2( 7, 9 )
 
 [node name="Caldo-player" type="KinematicBody2D"]
 script = ExtResource( 2 )

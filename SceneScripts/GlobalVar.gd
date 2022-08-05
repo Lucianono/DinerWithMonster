@@ -21,7 +21,8 @@ func _ready():
 	total_repair_points = 100
 	repair_label.set_text("Repair Points : " + str(total_repair_points))
 	
-	screensize = get_viewport().size
+	screensize = get_viewport().get_visible_rect().size
+	print(screensize)
 	set_physics_process(false)
 	pass
 

@@ -7,8 +7,8 @@ var isPlayerThrowing = false
 var isClickOnRight = true
 var global_dish_name = null
 
-var hold_pos = 100
-var speed = 1000
+var hold_pos = 30
+var speed = 500
 
 var screensize
 var slope_vector
