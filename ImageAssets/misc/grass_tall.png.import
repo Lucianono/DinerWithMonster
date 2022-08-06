@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/a6.png-76efe24732afa5bc8a4a3bce9829874c.stex"
+path="res://.import/grass_tall.png-db7fc9338ef83190a3f0a2035cdaad8e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ImageAssets/a6.png"
-dest_files=[ "res://.import/a6.png-76efe24732afa5bc8a4a3bce9829874c.stex" ]
+source_file="res://ImageAssets/misc/grass_tall.png"
+dest_files=[ "res://.import/grass_tall.png-db7fc9338ef83190a3f0a2035cdaad8e.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
