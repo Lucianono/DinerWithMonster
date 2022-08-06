@@ -156,7 +156,7 @@ func customer_assign():
 				current_row = rand_row
 				cust_ent.initCustIndex(cust_col_ctr,rand_row)
 				cust_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
-				$Customers.call_deferred("add_child",cust_ent)
+				$YSort/Customers.call_deferred("add_child",cust_ent)
 				cust_ent.initFoodOrder(["Pandesal"])
 				break
 		else :
