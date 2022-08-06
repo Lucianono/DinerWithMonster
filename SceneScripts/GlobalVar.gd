@@ -10,7 +10,7 @@ var player_dish_holding = null
 var isPlayerCooking = false
 
 var screensize
-var stall_position
+onready var stall_obj
 
 var repair_timer
 var countStallDestroyed = 0
@@ -41,11 +41,11 @@ func organize_line(col,row):
 	var destination_pos = Vector2()
 	match col:
 		0:
-			destination_pos.x = stall_position.x
+			destination_pos.x = stall_obj.position.x
 		1:
-			destination_pos.x = (screensize.x - stall_position.x)/3 + stall_position.x
+			destination_pos.x = (screensize.x - stall_obj.position.x)/3 + stall_obj.position.x
 		2:
-			destination_pos.x = (2 * (screensize.x - stall_position.x)/3) + stall_position.x
+			destination_pos.x = (2 * (screensize.x - stall_obj.position.x)/3) + stall_obj.position.x
 		_:
 			destination_pos.x = screensize.x + 400
 				
@@ -53,14 +53,20 @@ func organize_line(col,row):
 		0:
 			destination_pos.y = 0
 		1:
-			destination_pos.y = screensize.y/4
+			destination_pos.y = 2*stall_obj.get_node("CollisionShape2D").shape.extents.y/4
 		2:
-			destination_pos.y = screensize.y/2
+			destination_pos.y = 2*stall_obj.get_node("CollisionShape2D").shape.extents.y/2
 		3:
-			destination_pos.y = 3 * screensize.y/4
+			destination_pos.y = 3 * 2*stall_obj.get_node("CollisionShape2D").shape.extents.y/4
 		_:
 			destination_pos.y = -200
-				
+	
+	
+	#center y pos		
+	if col != null and row != null:
+		destination_pos.y += ((screensize.y - 2*stall_obj.get_node("CollisionShape2D").shape.extents.y) / 2) + 16
+		destination_pos.x += 40
+		
 	return(destination_pos)
 
 

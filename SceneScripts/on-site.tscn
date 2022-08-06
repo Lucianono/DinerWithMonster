@@ -146,7 +146,6 @@ position = Vector2( 0, 24 )
 position = Vector2( 0, 72 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StallNodes"]
-visible = false
 shape = SubResource( 2 )
 
 [node name="HUD" type="Control" parent="."]

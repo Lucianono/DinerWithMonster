@@ -27,8 +27,9 @@ func _ready():
 	field_position = get_node("YSort/Field").get_position()
 	pond_positon = get_node("YSort/Pond").get_position()
 	grill_postion = get_node("YSort/Grill").get_position()
-	stall_position = get_node("StallNodes").get_position()
-	GlobalVar.stall_position = stall_position
+	
+	stall_obj = get_node("StallNodes")
+	GlobalVar.stall_obj = stall_obj
 	
 	randomize()
 	set_process(true)
@@ -124,7 +125,7 @@ onready var whitelady = preload ("res://CustomerSceneScripts/whitelady-cust.tscn
 onready var tyanak = preload ("res://CustomerSceneScripts/tyanak-cust.tscn")
 var arr_cust_line = []
 var cust_col_ctr = 0
-var stall_position
+var stall_obj
 
 var current_row
 var current_col

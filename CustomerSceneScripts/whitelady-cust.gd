@@ -41,7 +41,7 @@ func _ready():
 	screensize = get_viewport().get_visible_rect().size
 	
 	line_pos = GlobalVar.organize_line(cust_col,cust_row)
-	position = Vector2(screensize.x,line_pos.y+10)
+	position = Vector2(screensize.x,line_pos.y)
 	
 	set_physics_process(true)
 	
@@ -66,7 +66,7 @@ func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
-		if position.x <= line_pos.x+40  :
+		if position.x <= line_pos.x  :
 			set_physics_process(false)
 			Timer2.start()
 	
