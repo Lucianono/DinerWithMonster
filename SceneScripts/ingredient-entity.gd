@@ -55,9 +55,9 @@ func _process(delta):
 	#for smart holding and throwing
 	if isPlayerHolding && !isPlayerThrowing:
 		if current_player_holding_size == 0:
-			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(hold_pos,0))
+			set_position(get_node("/root/Node2D/YSort/Caldo-player").get_position()+Vector2(hold_pos,0))
 		else :
-			set_position(get_node("/root/Node2D/Caldo-player").get_position()+Vector2(-hold_pos,0))
+			set_position(get_node("/root/Node2D/YSort/Caldo-player").get_position()+Vector2(-hold_pos,0))
 	elif !isPlayerHolding && isPlayerThrowing:
 		if isClickOnRight:
 			set_position(position + Vector2(1,-1) * slope_vector * speed * delta)

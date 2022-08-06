@@ -73,7 +73,7 @@ func _physics_process(delta):
 	else :
 		#exclusive behavior
 		if GlobalVar.countStallDestroyed > 0 :
-			dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
+			dest_pos = get_node("/root/Node2D/YSort/Caldo-player").get_position()
 		else :
 			dest_pos = get_node("/root/Node2D/StallNodes").get_position()
 		Timer3.start()
@@ -143,7 +143,7 @@ func teleport_signal():
 	
 	if GlobalVar.countStallDestroyed > 0 :
 		position = dest_pos
-		dest_pos = get_node("/root/Node2D/Caldo-player").get_position()
+		dest_pos = get_node("/root/Node2D/YSort/Caldo-player").get_position()
 	else :
 		position.x = dest_pos.x
 		dest_pos = get_node("/root/Node2D/StallNodes").get_position()

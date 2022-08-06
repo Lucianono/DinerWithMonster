@@ -27,7 +27,6 @@ func _on_Area2D_area_exited(area):
 	if area.is_in_group("customers") :
 		isCustAttacking = false
 	if area.get_name() == "caldo-area":
-		print("exit")
 		isPlayerClose = false
 
 #atk signal from customers

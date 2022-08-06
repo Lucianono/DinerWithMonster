@@ -116,7 +116,7 @@ func _on_Area2D_area_entered(area):
 func cust_angry():
 	if isPassive == true : 	
 		position.x -= 10
-		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
+		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/YSort/Caldo-player").get_position())
 		set_physics_process(true)
 		isPassive = false
 		bullet_pos = $Bullet.position
@@ -133,7 +133,7 @@ func boredom_signal():
 
 #customer shoots
 func shoot_signal():
-	slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
+	slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/YSort/Caldo-player").get_position())
 	$Bullet.position = bullet_pos
 	set_physics_process(true)
 

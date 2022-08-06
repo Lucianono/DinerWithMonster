@@ -22,11 +22,11 @@ var cust_row = 4
 func _ready():
 	screensize = get_viewport().get_visible_rect().size
 
-	coop_position = get_node("Coop").get_position()
-	butcher_position = get_node("Butcher").get_position()
-	field_position = get_node("Field").get_position()
-	pond_positon = get_node("Pond").get_position()
-	grill_postion = get_node("Grill").get_position()
+	coop_position = get_node("YSort/Coop").get_position()
+	butcher_position = get_node("YSort/Butcher").get_position()
+	field_position = get_node("YSort/Field").get_position()
+	pond_positon = get_node("YSort/Pond").get_position()
+	grill_postion = get_node("YSort/Grill").get_position()
 	stall_position = get_node("StallNodes").get_position()
 	GlobalVar.stall_position = stall_position
 	
@@ -155,7 +155,7 @@ func customer_assign():
 				current_row = rand_row
 				cust_ent.initCustIndex(cust_col_ctr,rand_row)
 				cust_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
-				call_deferred("add_child",cust_ent)
+				$Customers.call_deferred("add_child",cust_ent)
 				cust_ent.initFoodOrder(["Pandesal"])
 				break
 		else :

@@ -65,8 +65,8 @@ func _physics_process(delta):
 	
 	else :
 		#exclusive behavior
-		var isPlayerOnRight = get_node("/root/Node2D/Caldo-player").get_position().x > position.x
-		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Caldo-player").get_position())
+		var isPlayerOnRight = get_node("/root/Node2D/YSort/Caldo-player").get_position().x > position.x
+		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/YSort/Caldo-player").get_position())
 		
 		#for smart following
 		if isPlayerOnRight:
