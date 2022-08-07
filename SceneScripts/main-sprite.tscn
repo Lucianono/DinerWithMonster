@@ -4,10 +4,10 @@
 [ext_resource path="res://SceneScripts/main-sprite.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 20 )
+extents = Vector2( 11, 17 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 10 )
+extents = Vector2( 6, 7 )
 
 [node name="Caldo-player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -21,4 +21,5 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 7 )
 shape = SubResource( 2 )
