@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ImageAssets/misc/balete2.png" type="Texture" id=1]
+[ext_resource path="res://ImageAssets/misc/shadow_blk.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="baleteII" type="StaticBody2D"]
 position = Vector2( 0, -5 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, 22 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

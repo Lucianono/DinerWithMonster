@@ -141,7 +141,7 @@ position = Vector2( 144, 121 )
 position = Vector2( 32, 32 )
 
 [node name="Grill" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 208, 32 )
+position = Vector2( 224, 48 )
 
 [node name="Miscellaneous" type="YSort" parent="YSort"]
 
