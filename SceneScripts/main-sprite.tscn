@@ -1,10 +1,43 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://ImageAssets/characters/caldo front.png" type="Texture" id=1]
+[ext_resource path="res://AnimationAssets/caldowalk/caldowalk.png" type="Texture" id=1]
 [ext_resource path="res://SceneScripts/main-sprite.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 17 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "walk"
+length = 0.5
+loop = true
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 3 ]
+}
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 7 )
@@ -16,9 +49,16 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="caldo-area"]
 texture = ExtResource( 1 )
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="caldo-area"]
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="caldo-area"]
+root_node = NodePath("../CollisionShape2D")
+autoplay = "walk"
+anims/RESET = SubResource( 4 )
+anims/walk = SubResource( 3 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
