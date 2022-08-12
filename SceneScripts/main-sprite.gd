@@ -3,7 +3,10 @@ extends KinematicBody2D
 var kboard = Vector2(0,0)
 var screensize
 var sprite_extent
-export var speed = 40
+export var speed = 120
+
+onready var anim_tree = get_node("caldo-area/AnimationTree")
+onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
 	sprite_extent = Vector2(16,25)
@@ -15,8 +18,15 @@ func _physics_process(_delta):
 	# when keyboard pressed
 	kboard.x = int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	kboard.y = int(Input.is_action_pressed("ui_down"))-int(Input.is_action_pressed("ui_up"))
+	if kboard != Vector2.ZERO:
+		anim_state.travel("walk")
+	else :
+		anim_state.travel("idleRight")
+		get_node("caldo-area/Sprite").scale.x = kboard.x
+	anim_tree.set("parameters/walk/blend_position",kboard)
 	kboard = kboard.normalized() * speed
 	kboard = move_and_slide(kboard)
+	
 	
 	#limits caldo position
 	position.y = clamp(position.y, 1 + sprite_extent.y, screensize.y - sprite_extent.y)

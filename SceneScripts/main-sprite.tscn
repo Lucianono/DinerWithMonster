@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://AnimationAssets/caldowalk/caldowalk.png" type="Texture" id=1]
+[ext_resource path="res://AnimationAssets/caldo.png" type="Texture" id=1]
 [ext_resource path="res://SceneScripts/main-sprite.gd" type="Script" id=2]
+[ext_resource path="res://ImageAssets/misc/shadow_brn.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 17 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/path = NodePath("caldo-area/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -18,26 +19,190 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0 ]
+"values": [ 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("caldo-area/Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "walk"
-length = 0.5
+[sub_resource type="Animation" id=20]
+resource_name = "idleRight"
 loop = true
-step = 0.125
+step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Sprite:frame")
+tracks/0/path = NodePath("caldo-area/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.375 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 6, 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("caldo-area/Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walkDown"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("caldo-area/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0, 3 ]
+"values": [ 4, 8 ]
 }
+
+[sub_resource type="Animation" id=6]
+resource_name = "walkLeft"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("caldo-area/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("caldo-area/Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.2, 0 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "walkRight"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("caldo-area/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("caldo-area/Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "walkUp"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("caldo-area/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 4 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "idleRight"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "walkLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "walkRight"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "walkRight"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "walkDown"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "walkUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=15]
+blend_point_0/node = SubResource( 8 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 9 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 13 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 18 )
+blend_point_3/pos = Vector2( 0, 1 )
+blend_point_4/node = SubResource( 19 )
+blend_point_4/pos = Vector2( 0, -1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachine" id=16]
+states/idleRight/node = SubResource( 21 )
+states/idleRight/position = Vector2( 348, 70 )
+states/walk/node = SubResource( 15 )
+states/walk/position = Vector2( 182, 74 )
+transitions = [ "walk", "idleRight", SubResource( 22 ), "idleRight", "walk", SubResource( 23 ) ]
+start_node = "idleRight"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 7 )
@@ -47,18 +212,37 @@ script = ExtResource( 2 )
 
 [node name="caldo-area" type="Area2D" parent="."]
 
+[node name="Sprite2" type="Sprite" parent="caldo-area"]
+visible = false
+position = Vector2( 0, 18 )
+scale = Vector2( 0.758621, 0.714286 )
+texture = ExtResource( 3 )
+
 [node name="Sprite" type="Sprite" parent="caldo-area"]
 texture = ExtResource( 1 )
+flip_h = true
 hframes = 4
+vframes = 3
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="caldo-area"]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="caldo-area"]
-root_node = NodePath("../CollisionShape2D")
-autoplay = "walk"
-anims/RESET = SubResource( 4 )
-anims/walk = SubResource( 3 )
+root_node = NodePath("../..")
+anims/RESET = SubResource( 3 )
+anims/idleRight = SubResource( 20 )
+anims/walkDown = SubResource( 5 )
+anims/walkLeft = SubResource( 6 )
+anims/walkRight = SubResource( 7 )
+anims/walkUp = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="caldo-area"]
+tree_root = SubResource( 16 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 17 )
+parameters/walk/blend_position = Vector2( 0, 0 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
