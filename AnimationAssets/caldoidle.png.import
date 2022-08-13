@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/caldowalk0003.png-0f07137c49fbeca7a620981e51d7de63.stex"
+path="res://.import/caldoidle.png-856b2bd0d49225f5663d900b9b61b9a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://AnimationAssets/caldowalk/caldowalk0003.png"
-dest_files=[ "res://.import/caldowalk0003.png-0f07137c49fbeca7a620981e51d7de63.stex" ]
+source_file="res://AnimationAssets/caldoidle.png"
+dest_files=[ "res://.import/caldoidle.png-856b2bd0d49225f5663d900b9b61b9a8.stex" ]
 
 [params]
 
