@@ -20,7 +20,8 @@ func _physics_process(_delta):
 	kboard.y = int(Input.is_action_pressed("ui_down"))-int(Input.is_action_pressed("ui_up"))
 	if kboard != Vector2.ZERO:
 		anim_state.travel("walk")
-		get_node("caldo-area/Sprite").scale.x = kboard.x
+		if kboard.x != 0 :
+			get_node("caldo-area/Sprite").scale.x = kboard.x
 	else :
 		anim_state.travel("idleRight")
 	anim_tree.set("parameters/walk/blend_position",kboard)
