@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://AnimationAssets/aswang.png" type="Texture" id=1]
 [ext_resource path="res://CustomerSceneScripts/aswang-cust.gd" type="Script" id=2]
@@ -24,7 +24,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=4]
 resource_name = "angry"
 length = 4.1
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -36,6 +35,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 30, 59 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "preAngryFinished"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -73,6 +86,22 @@ tracks/0/keys = {
 "values": [ 90, 103 ]
 }
 
+[sub_resource type="Animation" id=19]
+resource_name = "idleTemp"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
 [sub_resource type="Animation" id=7]
 resource_name = "walk"
 length = 0.8
@@ -100,6 +129,9 @@ animation = "angrywalk"
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "atk"
 
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "idleTemp"
+
 [sub_resource type="AnimationNodeAnimation" id=11]
 animation = "walk"
 
@@ -113,6 +145,14 @@ animation = "walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
 [sub_resource type="AnimationNodeStateMachine" id=17]
 states/angry/node = SubResource( 8 )
 states/angry/position = Vector2( 122, 191 )
@@ -120,10 +160,13 @@ states/angrywalk/node = SubResource( 9 )
 states/angrywalk/position = Vector2( 335, 196 )
 states/atk/node = SubResource( 10 )
 states/atk/position = Vector2( 335, 62 )
+states/idleTemp/node = SubResource( 20 )
+states/idleTemp/position = Vector2( -85, 51 )
 states/walk/node = SubResource( 11 )
-states/walk/position = Vector2( 122, 52 )
-transitions = [ "walk", "angry", SubResource( 12 ), "angry", "angrywalk", SubResource( 13 ), "angrywalk", "atk", SubResource( 14 ), "atk", "angrywalk", SubResource( 15 ), "angrywalk", "walk", SubResource( 16 ) ]
+states/walk/position = Vector2( 122, 51 )
+transitions = [ "walk", "angry", SubResource( 12 ), "angry", "angrywalk", SubResource( 13 ), "angrywalk", "atk", SubResource( 14 ), "atk", "angrywalk", SubResource( 15 ), "angrywalk", "walk", SubResource( 16 ), "walk", "idleTemp", SubResource( 21 ), "idleTemp", "walk", SubResource( 22 ), "idleTemp", "angry", SubResource( 23 ), "angry", "idleTemp", SubResource( 24 ) ]
 start_node = "walk"
+graph_offset = Vector2( -349.511, 23.715 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
@@ -149,6 +192,7 @@ anims/RESET = SubResource( 3 )
 anims/angry = SubResource( 4 )
 anims/angrywalk = SubResource( 5 )
 anims/atk = SubResource( 6 )
+anims/idleTemp = SubResource( 19 )
 anims/walk = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Area2D"]
@@ -167,4 +211,3 @@ one_shot = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
-[connection signal="animation_finished" from="Area2D/AnimationPlayer" to="." method="preAngryFinished"]
