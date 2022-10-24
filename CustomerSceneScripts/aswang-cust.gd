@@ -20,7 +20,6 @@ var cust_col
 var cust_row
 var line_pos
 
-onready var anim_player = get_node("Area2D/AnimationPlayer")
 onready var anim_tree = get_node("Area2D/AnimationTree")
 onready var anim_state = anim_tree.get("parameters/playback")
 
