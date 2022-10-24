@@ -26,9 +26,9 @@ onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
 	get_node("Area2D/Sprite").scale.x = -1
-	Timer1 = get_node("Timer")
-	Timer1.connect("timeout", self, "atk_signal")
-	Timer1.set_wait_time(2)
+	#Timer1 = get_node("Timer")
+	#Timer1.connect("timeout", self, "atk_signal")
+	#Timer1.set_wait_time(2)
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
 	Timer2.set_wait_time(5)
@@ -119,7 +119,7 @@ func _on_Area2D_area_entered(area):
 	#print (area)
 	if area.is_in_group("farm_set"):
 		area_being_entered = area
-		Timer1.start()
+		#Timer1.start()
 		anim_state.travel("atk")
 
 #when farm exited to stop	
@@ -127,7 +127,7 @@ func _on_Area2D_area_exited(area):
 	if area.is_in_group("farm_set") and !isPassive:
 		print("exit" , area)
 		anim_state.travel("angrywalk")
-		Timer1.stop()
+		#Timer1.stop()
 
 #execute to attack farm
 func atk_signal():
