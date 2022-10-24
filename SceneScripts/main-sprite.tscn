@@ -36,12 +36,12 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=20]
 resource_name = "idleRight"
-length = 2.0
+length = 2.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("caldo-area/Sprite:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -53,9 +53,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "walkDown"
-length = 0.8
+length = 0.6
 loop = true
-step = 0.2
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("caldo-area/Sprite:frame")
 tracks/0/interp = 1
@@ -63,7 +63,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 9, 10, 11, 12 ]
@@ -71,9 +71,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "walkRight"
-length = 0.8
+length = 0.6
 loop = true
-step = 0.2
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("caldo-area/Sprite:frame")
 tracks/0/interp = 1
@@ -81,7 +81,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 19, 20, 21 ]
@@ -101,9 +101,9 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "walkUp"
-length = 0.8
+length = 0.6
 loop = true
-step = 0.2
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("caldo-area/Sprite:frame")
 tracks/0/interp = 1
@@ -111,7 +111,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -196,7 +196,7 @@ tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 17 )
-parameters/walk/blend_position = Vector2( 0, 0 )
+parameters/walk/blend_position = Vector2( -0.0289017, -0.189655 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
