@@ -25,7 +25,6 @@ func _physics_process(_delta):
 			get_node("caldo-area/Sprite").scale.x = kboard.x
 	else :
 		anim_state.travel("idleRight")
-	
 	kboard = kboard.normalized() * speed
 	kboard = move_and_slide(kboard)
 	

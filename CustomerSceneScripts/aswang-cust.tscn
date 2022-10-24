@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://AnimationAssets/aswang.png" type="Texture" id=1]
 [ext_resource path="res://CustomerSceneScripts/aswang-cust.gd" type="Script" id=2]
@@ -23,12 +23,12 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "angry"
-length = 4.0
+length = 4.1
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -58,12 +58,12 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=6]
 resource_name = "atk"
-length = 2.0
+length = 2.1
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
@@ -91,6 +91,42 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "angry"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "angrywalk"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "atk"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/angry/node = SubResource( 8 )
+states/angry/position = Vector2( 122, 191 )
+states/angrywalk/node = SubResource( 9 )
+states/angrywalk/position = Vector2( 335, 196 )
+states/atk/node = SubResource( 10 )
+states/atk/position = Vector2( 335, 62 )
+states/walk/node = SubResource( 11 )
+states/walk/position = Vector2( 122, 52 )
+transitions = [ "walk", "angry", SubResource( 12 ), "angry", "angrywalk", SubResource( 13 ), "angrywalk", "atk", SubResource( 14 ), "atk", "angrywalk", SubResource( 15 ), "angrywalk", "walk", SubResource( 16 ) ]
+start_node = "walk"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 9 )
 
@@ -115,6 +151,12 @@ anims/angrywalk = SubResource( 5 )
 anims/atk = SubResource( 6 )
 anims/walk = SubResource( 7 )
 
+[node name="AnimationTree" type="AnimationTree" parent="Area2D"]
+tree_root = SubResource( 17 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 18 )
+
 [node name="KineCollision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
@@ -125,3 +167,4 @@ one_shot = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
+[connection signal="animation_finished" from="Area2D/AnimationPlayer" to="." method="preAngryFinished"]

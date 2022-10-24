@@ -19,6 +19,9 @@ var cust_col
 var cust_row
 var line_pos
 
+onready var anim_player = get_node("Area2D/AnimationPlayer")
+onready var anim_tree = get_node("Area2D/AnimationTree")
+onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
 	Timer1 = get_node("Timer")
@@ -58,6 +61,7 @@ func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
+		get_node("Area2D/Sprite").scale.x = -1
 		if position.x <= line_pos.x:
 			
 			set_physics_process(false)
@@ -65,14 +69,17 @@ func _physics_process(delta):
 	
 	else :
 		#exclusive behavior
+		
 		var isPlayerOnRight = get_node("/root/Node2D/YSort/Caldo-player").get_position().x > position.x
 		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/YSort/Caldo-player").get_position())
 		
 		#for smart following
 		if isPlayerOnRight:
 			move_and_slide(Vector2(1,-1) * slope_vector * speed * delta)
+			get_node("Area2D/Sprite").scale.x = 1
 		else:
 			move_and_slide(Vector2(-1,1) * slope_vector * speed * delta)
+			get_node("Area2D/Sprite").scale.x = -1
 			
 	# free when outside screen
 	if position.x - 20 > screensize.x :
@@ -95,12 +102,14 @@ func _on_Area2D_area_entered(area):
 				speed *= -1
 				get_node("KineCollision").set_deferred("disabled", true)
 				isPassive = true
+				get_node("Area2D/Sprite").scale.x = 1
 				line_pos *= 0
 				get_node("Area2D").set_deferred("monitoring", false)
 				get_node("Area2D").set_deferred("monitorable", false)
 				Timer2.stop()
 		
 		else:
+			start_preAngry()
 			isPassive = false
 				
 	elif area.is_in_group("ingredients"):
@@ -128,5 +137,12 @@ func boredom_signal():
 	set_physics_process(true)
 	isPassive = false
 
+#pre-angry animation
+func start_preAngry():
+	anim_state.travel("angry")
 
 
+
+func preAngryFinished(anim_name):
+	print ("anim finished")
+	pass # Replace with function body.
