@@ -63,6 +63,7 @@ func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
 		move_and_slide(Vector2(-1,0) * speed * delta)
+		anim_state.travel("walk")
 		if position.x <= line_pos.x:
 			set_physics_process(false)
 			Timer2.start()
@@ -92,9 +93,9 @@ func _physics_process(delta):
 func _on_Area2D_area_entered(area):
 	
 	if  area.is_in_group("dishes"):
-		set_physics_process(true)
 		speed = init_speed
 		if global_dish_order.has(area.getDishName()):
+			set_physics_process(true)
 			global_dish_order.erase(area.getDishName())
 			print(global_dish_order)
 			
