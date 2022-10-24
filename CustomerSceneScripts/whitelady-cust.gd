@@ -28,9 +28,9 @@ onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
 	get_node("Area2D/Sprite").scale.x = -1
-	Timer1 = get_node("Timer")
-	Timer1.connect("timeout", self, "atk_signal")
-	Timer1.set_wait_time(.5)
+	#Timer1 = get_node("Timer")
+	#Timer1.connect("timeout", self, "atk_signal")
+	#Timer1.set_wait_time(.5)
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
 	Timer2.set_wait_time(5.5)
@@ -128,7 +128,7 @@ func _on_Area2D_area_entered(area):
 func _on_Area2D_area_exited(area):
 	if area.is_in_group("farm_set"):
 		print("exit" , area)
-		Timer1.stop()
+		#Timer1.stop()
 
 #execute to attack farm
 func atk_signal():
@@ -136,6 +136,9 @@ func atk_signal():
 	if area_being_entered != null :
 		if area_being_entered.is_in_group("farm_set"):
 			GlobalVar.emit_signal("attack",10)
+	
+	if GlobalVar.countStallDestroyed > 0 :
+		dest_pos = get_node("/root/Node2D/YSort/Caldo-player").get_position()
 		
 #customer cant wait
 func boredom_signal():
@@ -143,14 +146,13 @@ func boredom_signal():
 	
 #customer cant wait
 func teleport_signal():
-	Timer1.start()
-	
+	#Timer1.start()
 	if GlobalVar.countStallDestroyed > 0 :
 		position = dest_pos
 		dest_pos = get_node("/root/Node2D/YSort/Caldo-player").get_position()
 	else :
-		position.x = dest_pos.x
 		dest_pos = get_node("/root/Node2D/StallNodes").get_position()
+		position.x = dest_pos.x
 		
 
 #pre-angry animation
@@ -161,7 +163,6 @@ func start_preAngry():
 		anim_state.travel("angry")
 		speed=0
 		Timer2.stop()
-		print(speed)
 		
 
 func preAngryFinished():
