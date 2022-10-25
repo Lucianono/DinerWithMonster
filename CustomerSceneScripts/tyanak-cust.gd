@@ -122,13 +122,12 @@ func _on_Area2D_area_entered(area):
 		
 
 func cust_angry():
-	if isPassive == true : 	
-		position.x -= 10
-		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/YSort/Caldo-player").get_position())
-		isPassive = false
-		bullet_pos = $Bullet.position
-		#Timer3.start()
-		get_node("KineCollision").set_deferred("disabled", true)
+	position.x -= 10
+	slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/YSort/Caldo-player").get_position())
+	isPassive = false
+	bullet_pos = $Bullet.position
+	#Timer3.start()
+	get_node("KineCollision").set_deferred("disabled", true)
 
 #execute to attack farm
 func atk_signal():
@@ -153,6 +152,7 @@ func _on_Bullet_area_entered(area):
 
 #pre-angry animation
 func start_preAngry():
+	isPassive = false
 	set_physics_process(false)
 	if speed != 0:
 		print("preangry")
@@ -163,6 +163,6 @@ func start_preAngry():
 
 func preAngryFinished():
 	print ("anim finished")
+	cust_angry()
 	anim_state.travel("atk")
 	speed = init_speed
-	cust_angry()

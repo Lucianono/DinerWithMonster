@@ -157,6 +157,7 @@ func teleport_signal():
 
 #pre-angry animation
 func start_preAngry():
+	isPassive = false
 	set_physics_process(false)
 	if speed != 0:
 		print("preangry")
@@ -169,7 +170,6 @@ func preAngryFinished():
 	print ("anim finished")
 	anim_state.travel("atk")
 	speed = init_speed
-	isPassive = false
 	set_physics_process(true)
 
 

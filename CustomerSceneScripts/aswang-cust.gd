@@ -140,6 +140,7 @@ func boredom_signal():
 
 #pre-angry animation
 func start_preAngry():
+	isPassive = false
 	if speed != 0:
 		print("preangry")
 		anim_state.travel("angry")
@@ -150,5 +151,4 @@ func preAngryFinished():
 	print ("anim finished")
 	speed = init_speed
 	anim_state.travel("angrywalk")
-	isPassive = false
 	set_physics_process(true)
