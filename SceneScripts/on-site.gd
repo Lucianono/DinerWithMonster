@@ -145,8 +145,8 @@ func _unhandled_input(event):
 func customer_assign():
 	randomize()
 	var cust_arr = [aswang.instance(),whitelady.instance(),tyanak.instance()]
-	var cust_ent = cust_arr[int(rand_range(0,cust_arr.size()))]
-	#var cust_ent = cust_arr[2]
+	#var cust_ent = cust_arr[int(rand_range(0,cust_arr.size()))]
+	var cust_ent = cust_arr[0]
 	var rand_row
 				
 	for i in 20 :
@@ -158,7 +158,7 @@ func customer_assign():
 				cust_ent.initCustIndex(cust_col_ctr,rand_row)
 				cust_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
 				$YSort/Customers.call_deferred("add_child",cust_ent)
-				cust_ent.initFoodOrder(["Pandesal"])
+				cust_ent.initFoodOrder(["Pandesal","Balot"])
 				break
 		else :
 			cust_col_ctr+=1
