@@ -57,27 +57,34 @@ func initFoodOrder(dish):
 	global_dish_order = dish
 	print(global_dish_order)
 	
-	match global_dish_order[0] :
-		"Adobo" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/adobo_dish.png"))
-		"Pandesal" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/pandesal_dish.png"))
-		"Balot" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/balot_dish.png"))
-		"Betamax" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/betamax_dish.png"))
-		"MeatBalls" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/mball_dish.png"))
-		"Relleno" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/relleno_dish.png"))
-		"Sisig" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/sisig_dish.png"))
-		"SquidBalls" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/sball_dish.png"))
-		"Tokneneng" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/tokneneng_dish.png"))
-		"Calamares" :
-			$Node2D/dish1.set_texture(preload("res://ImageAssets/dish/calamares_dish.png"))
+	for i in global_dish_order.size():
+		print("hiho")
+		var dish_node = TextureRect.new();
+		
+		match global_dish_order[i] :
+			"Adobo" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/adobo_dish.png"))
+			"Pandesal" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/pandesal_dish.png"))
+			"Balot" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/balot_dish.png"))
+			"Betamax" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/betamax_dish.png"))
+			"MeatBalls" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/mball_dish.png"))
+			"Relleno" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/relleno_dish.png"))
+			"Sisig" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/sisig_dish.png"))
+			"SquidBalls" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/sball_dish.png"))
+			"Tokneneng" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/tokneneng_dish.png"))
+			"Calamares" :
+				dish_node.set_texture(preload("res://ImageAssets/dish/calamares_dish.png"))
+
+		$CenterContainer/PanelContainer/Node2D.add_child(dish_node)
+	
 	
 	
 func _physics_process(delta):
