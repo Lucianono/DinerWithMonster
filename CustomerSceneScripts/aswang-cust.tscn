@@ -245,6 +245,7 @@ shape = SubResource( 1 )
 one_shot = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
 margin_left = -26.0
 margin_top = -32.0
 margin_right = 40.0

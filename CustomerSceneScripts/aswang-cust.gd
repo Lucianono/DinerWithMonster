@@ -95,6 +95,7 @@ func _physics_process(delta):
 		move_and_slide(Vector2(-1,0) * speed * delta)
 		anim_state.travel("walk")
 		if position.x <= line_pos.x:
+			$CenterContainer.visible = true 
 			set_physics_process(false)
 			Timer2.start()
 			anim_state.travel("idleTemp")
@@ -132,6 +133,7 @@ func _on_Area2D_area_entered(area):
 			
 			
 			if global_dish_order == [] :
+				$CenterContainer.visible = false 
 				anim_state.travel("walk")
 				emit_signal("customer_satisfied",cust_col,cust_row)
 				speed *= -1
