@@ -8,7 +8,7 @@
 z_as_relative = false
 
 [node name="Node" type="Node2D" parent="."]
-position = Vector2( 0, 15 )
+position = Vector2( 0, 11 )
 
 [node name="Sprite2" type="Sprite" parent="Node"]
 position = Vector2( -10, 0 )

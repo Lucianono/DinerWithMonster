@@ -126,7 +126,7 @@ position = Vector2( 192, -32 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Caldo-player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 224, 136 )
+position = Vector2( 224, 160 )
 
 [node name="Coop" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 144, 176 )
@@ -135,7 +135,7 @@ position = Vector2( 144, 176 )
 position = Vector2( 32, 240 )
 
 [node name="Field" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 144, 121 )
+position = Vector2( 144, 117 )
 
 [node name="Pond" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 32, 32 )
