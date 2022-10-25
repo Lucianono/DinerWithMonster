@@ -13,6 +13,7 @@ var global_dest_pos_x = 0
 var screensize
 
 var global_dish_order = []
+var dish_disp_nodes = []
 var isPassive = true
 var isAngryable = true
 
@@ -60,6 +61,7 @@ func initFoodOrder(dish):
 	for i in global_dish_order.size():
 		print("hiho")
 		var dish_node = TextureRect.new();
+		dish_node.set_name(global_dish_order[i])
 		
 		match global_dish_order[i] :
 			"Adobo" :
@@ -125,7 +127,9 @@ func _on_Area2D_area_entered(area):
 		if global_dish_order.has(area.getDishName()):
 			set_physics_process(true)
 			global_dish_order.erase(area.getDishName())
+			$CenterContainer/PanelContainer/Node2D.get_node(area.getDishName()).queue_free()
 			print(global_dish_order)
+			
 			
 			if global_dish_order == [] :
 				anim_state.travel("walk")
