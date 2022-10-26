@@ -148,6 +148,9 @@ func customer_assign():
 	#var cust_ent = cust_arr[int(rand_range(0,cust_arr.size()))]
 	var cust_ent = cust_arr[0]
 	var rand_row
+	var basic_dish = ["Adobo","Pandesal","Balot","Betamax"]
+	var combo_dish = ["MeatBalls","Relleno","Sisig","SquidBalls","Tokneneng","Calamares"]
+	var cust_order_dish = []
 				
 	for i in 20 :
 		if arr_cust_line[cust_col_ctr].has(null) :
@@ -158,7 +161,15 @@ func customer_assign():
 				cust_ent.initCustIndex(cust_col_ctr,rand_row)
 				cust_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
 				$YSort/Customers.call_deferred("add_child",cust_ent)
-				cust_ent.initFoodOrder(["Pandesal","Balot"])
+				
+				for j in rand_range(0,3) :
+					if int(rand_range(0,2)) == 0 :
+						cust_order_dish.append(basic_dish[rand_range(0,4)])
+					else :
+						cust_order_dish.append(combo_dish[rand_range(0,6)])
+					
+				cust_ent.initFoodOrder(cust_order_dish)
+				
 				break
 		else :
 			cust_col_ctr+=1

@@ -3,7 +3,7 @@ extends KinematicBody2D
 var kboard = Vector2(0,0)
 var screensize
 var sprite_extent
-export var speed = 120
+export var speed = 150
 
 onready var anim_tree = get_node("caldo-area/AnimationTree")
 onready var anim_state = anim_tree.get("parameters/playback")
