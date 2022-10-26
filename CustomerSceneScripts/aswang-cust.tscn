@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://AnimationAssets/aswang.png" type="Texture" id=1]
 [ext_resource path="res://CustomerSceneScripts/aswang-cust.gd" type="Script" id=2]
@@ -187,6 +187,12 @@ graph_offset = Vector2( -349.511, 23.715 )
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 9 )
 
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.341176, 0.866667, 0.247059, 1 )
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.227451, 0.207843, 0.207843, 1 )
+
 [sub_resource type="Theme" id=25]
 
 [sub_resource type="StyleBoxFlat" id=26]
@@ -244,7 +250,20 @@ shape = SubResource( 1 )
 [node name="Timer2" type="Timer" parent="."]
 one_shot = true
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = -13.0
+margin_top = -37.0
+margin_right = 13.0
+margin_bottom = -34.0
+custom_styles/fg = SubResource( 27 )
+custom_styles/bg = SubResource( 28 )
+max_value = 5.0
+step = 1.0
+value = 5.0
+percent_visible = false
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
 margin_left = -26.0
 margin_top = -32.0
 margin_right = 40.0

@@ -21,17 +21,18 @@ var cust_col
 var cust_row
 var line_pos
 
+onready var wait_pb = get_node("ProgressBar")
 onready var anim_tree = get_node("Area2D/AnimationTree")
 onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
+	var cust_max_wait_time = 7
+	
 	get_node("Area2D/Sprite").scale.x = -1
-	#Timer1 = get_node("Timer")
-	#Timer1.connect("timeout", self, "atk_signal")
-	#Timer1.set_wait_time(2)
+	wait_pb.max_value = cust_max_wait_time
 	Timer2 = get_node("Timer2")
 	Timer2.connect("timeout", self, "boredom_signal")
-	Timer2.set_wait_time(5)
+	Timer2.set_wait_time(cust_max_wait_time)
 	
 	
 	add_to_group("customers")
@@ -41,6 +42,7 @@ func _ready():
 	position = Vector2(screensize.x,line_pos.y)
 	
 	set_physics_process(true)
+	set_process(false)
 	
 	if line_pos.x > screensize.x+200:
 		position = Vector2(1400,1)
@@ -98,6 +100,7 @@ func _physics_process(delta):
 			$CenterContainer.visible = true 
 			set_physics_process(false)
 			Timer2.start()
+			set_process(true)
 			anim_state.travel("idleTemp")
 	
 	else :
@@ -118,6 +121,9 @@ func _physics_process(delta):
 		queue_free()
 		print("cust freed")
 		
+# for pb display
+func _process (delta):
+	wait_pb.value = Timer2.time_left
 
 
 #when a dish and farm entered
@@ -175,6 +181,7 @@ func boredom_signal():
 
 #pre-angry animation
 func start_preAngry():
+	set_process(false)
 	isPassive = false
 	if speed != 0:
 		print("preangry")
