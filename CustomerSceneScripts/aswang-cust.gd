@@ -21,12 +21,12 @@ var cust_col
 var cust_row
 var line_pos
 
-onready var wait_pb = get_node("ProgressBar")
+onready var wait_pb = get_node("HBoxContainer/ProgressBar")
 onready var anim_tree = get_node("Area2D/AnimationTree")
 onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
-	var cust_max_wait_time = 7
+	var cust_max_wait_time = 20
 	
 	get_node("Area2D/Sprite").scale.x = -1
 	wait_pb.max_value = cust_max_wait_time
@@ -63,7 +63,7 @@ func initFoodOrder(dish):
 	for i in global_dish_order.size():
 		print("hiho")
 		var dish_node = TextureRect.new();
-		dish_node.set_name(global_dish_order[i])
+		dish_node.add_to_group(global_dish_order[i])
 		
 		match global_dish_order[i] :
 			"Adobo" :
@@ -98,6 +98,7 @@ func _physics_process(delta):
 		anim_state.travel("walk")
 		if position.x <= line_pos.x:
 			$CenterContainer.visible = true 
+			$HBoxContainer.visible = true 
 			set_physics_process(false)
 			Timer2.start()
 			set_process(true)
@@ -134,12 +135,14 @@ func _on_Area2D_area_entered(area):
 		if global_dish_order.has(area.getDishName()):
 			set_physics_process(true)
 			global_dish_order.erase(area.getDishName())
-			$CenterContainer/PanelContainer/Node2D.get_node(area.getDishName()).queue_free()
+			get_tree().get_nodes_in_group(area.getDishName())[0].queue_free()
+			
 			print(global_dish_order)
 			
 			
 			if global_dish_order == [] :
 				$CenterContainer.visible = false 
+				$HBoxContainer.visible = true 
 				anim_state.travel("walk")
 				emit_signal("customer_satisfied",cust_col,cust_row)
 				speed *= -1
@@ -182,6 +185,7 @@ func boredom_signal():
 #pre-angry animation
 func start_preAngry():
 	set_process(false)
+	wait_pb.value = 0
 	isPassive = false
 	if speed != 0:
 		print("preangry")

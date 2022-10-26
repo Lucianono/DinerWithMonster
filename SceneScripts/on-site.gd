@@ -164,9 +164,9 @@ func customer_assign():
 				
 				for j in rand_range(0,3) :
 					if int(rand_range(0,2)) == 0 :
-						cust_order_dish.append(basic_dish[rand_range(0,4)])
+						cust_order_dish.append(basic_dish[rand_range(0,1)])
 					else :
-						cust_order_dish.append(combo_dish[rand_range(0,6)])
+						cust_order_dish.append(combo_dish[rand_range(0,1)])
 					
 				cust_ent.initFoodOrder(cust_order_dish)
 				
