@@ -162,6 +162,7 @@ func customer_assign():
 				cust_ent.connect("customer_satisfied",self,"_on_Aswangenemy_customer_satisfied")
 				$YSort/Customers.call_deferred("add_child",cust_ent)
 				
+				#randomize dish order
 				for j in rand_range(0,3) :
 					if int(rand_range(0,2)) == 0 :
 						cust_order_dish.append(basic_dish[rand_range(0,1)])
