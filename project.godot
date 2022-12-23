@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Food Throw Smtn"
+config/name="DinerWithMonster"
 run/main_scene="res://SceneScripts/on-site.tscn"
 config/icon="res://icon.png"
 
