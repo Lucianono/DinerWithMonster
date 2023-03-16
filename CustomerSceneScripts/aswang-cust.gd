@@ -27,7 +27,7 @@ var line_pos
 @onready var anim_tree = get_node("Area2D/AnimationTree")
 @onready var anim_state = anim_tree.get("parameters/playback")
 
-@onready var twn_order = get_node("Tween")
+@onready var twn_order = Tween.new()
 
 func _ready():
 	var cust_max_wait_time = 20
@@ -38,7 +38,7 @@ func _ready():
 	Timer2.connect("timeout",Callable(self,"boredom_signal"))
 	Timer2.set_wait_time(cust_max_wait_time)
 	
-	twn_order.interpolate_property(dish_node,'scale',dish_node.get_scale(),Vector2.ZERO,1,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	/ twn_order.interpolate_property(dish_node,'scale',dish_node.get_scale(),Vector2.ZERO,1,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	
 	add_to_group("customers")
 	screensize = get_viewport().get_visible_rect().size

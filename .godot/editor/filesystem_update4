@@ -1,2 +1,4 @@
 res://SceneScripts/default_env.tres
 res://SceneScripts/on-site.tscn
+res://CustomerSceneScripts/aswang-cust.tscn
+res://CustomerSceneScripts/aswang-cust.gd

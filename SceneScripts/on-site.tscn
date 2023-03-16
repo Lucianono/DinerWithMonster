@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" path="res://SceneScripts/magical-grill.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://SceneScripts/dish-entity.tscn" id="10"]
 [ext_resource type="Texture2D" uid="uid://b17iv4oc3njc6" path="res://ImageAssets/groundmap.png" id="11"]
-[ext_resource type="PackedScene" path="res://CustomerSceneScripts/aswang-cust.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://bbflvk5wqowyj" path="res://CustomerSceneScripts/aswang-cust.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://MiscellaneousScenes/balete.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://MiscellaneousScenes/wildgrass.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://MiscellaneousScenes/wildgrass_tall.tscn" id="15"]
