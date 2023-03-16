@@ -7,11 +7,11 @@ var isCustAttacking = false
 var isPlayerClose = false
 var isFarmDestroyed = false
 
-onready var health_bar = $ProgressBar
+@onready var health_bar = $ProgressBar
 
 func _ready():
 	health_bar.visible = false
-	var _x = GlobalVar.connect("attack",self,"_on_attack")
+	var _x = GlobalVar.connect("attack",Callable(self,"_on_attack"))
 	health_bar.value = hp
 
 #when caldo touch butcher
@@ -43,7 +43,7 @@ func _on_attack(atk):
 #spacebar to fix		
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed and isPlayerClose and hp < 20  and GlobalVar.total_repair_points >= (20-hp):
-		if event.scancode == KEY_SPACE:
+		if event.keycode == KEY_SPACE:
 			print(get_name()," fixed")
 			GlobalVar.repair_farm(20, hp)
 			farm_state(false ,20)

@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal customer_satisfied(col,row)
 
@@ -23,22 +23,22 @@ var cust_col
 var cust_row
 var line_pos
 
-onready var wait_pb = get_node("HBoxContainer/ProgressBar")
-onready var anim_tree = get_node("Area2D/AnimationTree")
-onready var anim_state = anim_tree.get("parameters/playback")
+@onready var wait_pb = get_node("HBoxContainer/ProgressBar")
+@onready var anim_tree = get_node("Area2D/AnimationTree")
+@onready var anim_state = anim_tree.get("parameters/playback")
 
-onready var twn_order = get_node("Tween")
+@onready var twn_order = get_node("Tween")
 
 func _ready():
 	var cust_max_wait_time = 20
 	
-	get_node("Area2D/Sprite").scale.x = -1
+	get_node("Area2D/Sprite2D").scale.x = -1
 	wait_pb.max_value = cust_max_wait_time
 	Timer2 = get_node("Timer2")
-	Timer2.connect("timeout", self, "boredom_signal")
+	Timer2.connect("timeout",Callable(self,"boredom_signal"))
 	Timer2.set_wait_time(cust_max_wait_time)
 	
-	twn_order.interpolate_property(dish_node,'rect_scale',dish_node.get_scale(),Vector2.ZERO,1,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	twn_order.interpolate_property(dish_node,'scale',dish_node.get_scale(),Vector2.ZERO,1,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	
 	add_to_group("customers")
 	screensize = get_viewport().get_visible_rect().size
@@ -100,7 +100,8 @@ func initFoodOrder(dish):
 func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
-		move_and_slide(Vector2(-1,0) * speed * delta)
+		set_velocity(Vector2(-1,0) * speed * delta)
+		move_and_slide()
 		anim_state.travel("walk")
 		if position.x <= line_pos.x:
 			$CenterContainer.visible = true 
@@ -112,16 +113,18 @@ func _physics_process(delta):
 	
 	else :
 		#exclusive behavior
-		var isPlayerOnRight = get_node("/root/Node2D/YSort/Caldo-player").get_position().x > position.x
-		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/YSort/Caldo-player").get_position())
+		var isPlayerOnRight = get_node("/root/Node2D/Node2D/Caldo-player").get_position().x > position.x
+		slope_vector = GlobalVar.slope_calculate(position,get_node("/root/Node2D/Node2D/Caldo-player").get_position())
 		
 		#for smart following
 		if isPlayerOnRight:
-			move_and_slide(Vector2(1,-1) * slope_vector * speed * delta)
-			get_node("Area2D/Sprite").scale.x = 1
+			set_velocity(Vector2(1,-1) * slope_vector * speed * delta)
+			move_and_slide()
+			get_node("Area2D/Sprite2D").scale.x = 1
 		else:
-			move_and_slide(Vector2(-1,1) * slope_vector * speed * delta)
-			get_node("Area2D/Sprite").scale.x = -1
+			set_velocity(Vector2(-1,1) * slope_vector * speed * delta)
+			move_and_slide()
+			get_node("Area2D/Sprite2D").scale.x = -1
 			
 	# free when outside screen
 	if position.x - 20 > screensize.x :
@@ -155,7 +158,7 @@ func _on_Area2D_area_entered(area):
 				speed *= -1
 				get_node("KineCollision").set_deferred("disabled", true)
 				isPassive = true
-				get_node("Area2D/Sprite").scale.x = 1
+				get_node("Area2D/Sprite2D").scale.x = 1
 				line_pos *= 0
 				get_node("Area2D").set_deferred("monitoring", false)
 				get_node("Area2D").set_deferred("monitorable", false)

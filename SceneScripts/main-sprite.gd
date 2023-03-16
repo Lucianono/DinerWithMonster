@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var kboard = Vector2(0,0)
 var screensize
 var sprite_extent
-export var speed = 150
+@export var speed = 150
 
-onready var anim_tree = get_node("caldo-area/AnimationTree")
-onready var anim_state = anim_tree.get("parameters/playback")
+@onready var anim_tree = get_node("caldo-area/AnimationTree")
+@onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
 	sprite_extent = Vector2(16,25)
@@ -22,11 +22,13 @@ func _physics_process(_delta):
 		anim_state.travel("walk")
 		anim_tree.set("parameters/walk/blend_position",kboard)
 		if kboard.x != 0 :
-			get_node("caldo-area/Sprite").scale.x = kboard.x
+			get_node("caldo-area/Sprite2D").scale.x = kboard.x
 	else :
 		anim_state.travel("idleRight")
 	kboard = kboard.normalized() * speed
-	kboard = move_and_slide(kboard)
+	set_velocity(kboard)
+	move_and_slide()
+	kboard = velocity
 	
 	
 	#limits caldo position

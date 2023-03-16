@@ -24,13 +24,13 @@ func initIngrName(ingr_name):
 	print(ingr_name)
 	match global_ingr_name :
 		"egg" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/egg_ingr.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/egg_ingr.png"))
 		"pork" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/pork_ingr.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/pork_ingr.png"))
 		"wheat" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/wheat_ingr.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/wheat_ingr.png"))
 		"squid" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/squid_ingr.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/squid_ingr.png"))
 
 #for getting the ingredient type
 func getIngrName():
@@ -55,9 +55,9 @@ func _process(delta):
 	#for smart holding and throwing
 	if isPlayerHolding && !isPlayerThrowing:
 		if current_player_holding_size == 0:
-			set_position(get_node("/root/Node2D/YSort/Caldo-player").get_position()+Vector2(hold_pos,0))
+			set_position(get_node("/root/Node2D/Node2D/Caldo-player").get_position()+Vector2(hold_pos,0))
 		else :
-			set_position(get_node("/root/Node2D/YSort/Caldo-player").get_position()+Vector2(-hold_pos,0))
+			set_position(get_node("/root/Node2D/Node2D/Caldo-player").get_position()+Vector2(-hold_pos,0))
 	elif !isPlayerHolding && isPlayerThrowing:
 		if isClickOnRight:
 			set_position(position + Vector2(1,-1) * slope_vector * speed * delta)
@@ -80,7 +80,7 @@ func _process(delta):
 #for left clicking
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && isPlayerHolding:
+		if event.button_index == MOUSE_BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
 				set_deferred("monitoring",true)
 				set_deferred("monitorable",true)

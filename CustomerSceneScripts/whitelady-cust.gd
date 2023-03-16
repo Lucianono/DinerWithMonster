@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal customer_satisfied(col,row)
 
@@ -23,19 +23,19 @@ var line_pos
 
 var dest_pos
 
-onready var anim_tree = get_node("Area2D/AnimationTree")
-onready var anim_state = anim_tree.get("parameters/playback")
+@onready var anim_tree = get_node("Area2D/AnimationTree")
+@onready var anim_state = anim_tree.get("parameters/playback")
 
 func _ready():
-	get_node("Area2D/Sprite").scale.x = -1
+	get_node("Area2D/Sprite2D").scale.x = -1
 	#Timer1 = get_node("Timer")
-	#Timer1.connect("timeout", self, "atk_signal")
+	#Timer1.connect("timeout",Callable(self,"atk_signal"))
 	#Timer1.set_wait_time(.5)
 	Timer2 = get_node("Timer2")
-	Timer2.connect("timeout", self, "boredom_signal")
+	Timer2.connect("timeout",Callable(self,"boredom_signal"))
 	Timer2.set_wait_time(5.5)
 	#Timer3 = get_node("Timer3")
-	#Timer3.connect("timeout", self, "teleport_signal")
+	#Timer3.connect("timeout",Callable(self,"teleport_signal"))
 	#Timer3.set_wait_time(2)
 	
 	
@@ -68,7 +68,8 @@ func initFoodOrder(dish):
 func _physics_process(delta):
 	# when customer is passive or angry
 	if isPassive:
-		move_and_slide(Vector2(-1,0) * speed * delta)
+		set_velocity(Vector2(-1,0) * speed * delta)
+		move_and_slide()
 		anim_state.travel("walk")
 		if position.x <= line_pos.x  :
 			set_physics_process(false)
@@ -78,7 +79,7 @@ func _physics_process(delta):
 	else :
 		#exclusive behavior
 		if GlobalVar.countStallDestroyed > 0 :
-			dest_pos = get_node("/root/Node2D/YSort/Caldo-player").get_position()
+			dest_pos = get_node("/root/Node2D/Node2D/Caldo-player").get_position()
 		else :
 			dest_pos = get_node("/root/Node2D/StallNodes").get_position()
 		#Timer3.start()
@@ -102,7 +103,7 @@ func _on_Area2D_area_entered(area):
 			print(global_dish_order)
 			
 			if global_dish_order == [] :
-				get_node("Area2D/Sprite").scale.x = 1
+				get_node("Area2D/Sprite2D").scale.x = 1
 				emit_signal("customer_satisfied",cust_col,cust_row)
 				speed *= -1
 				get_node("KineCollision").set_deferred("disabled", true)
@@ -138,7 +139,7 @@ func atk_signal():
 			GlobalVar.emit_signal("attack",10)
 	
 	if GlobalVar.countStallDestroyed > 0 :
-		dest_pos = get_node("/root/Node2D/YSort/Caldo-player").get_position()
+		dest_pos = get_node("/root/Node2D/Node2D/Caldo-player").get_position()
 		
 #customer cant wait
 func boredom_signal():
@@ -149,7 +150,7 @@ func teleport_signal():
 	#Timer1.start()
 	if GlobalVar.countStallDestroyed > 0 :
 		position = dest_pos
-		dest_pos = get_node("/root/Node2D/YSort/Caldo-player").get_position()
+		dest_pos = get_node("/root/Node2D/Node2D/Caldo-player").get_position()
 	else :
 		dest_pos = get_node("/root/Node2D/StallNodes").get_position()
 		position.x = dest_pos.x

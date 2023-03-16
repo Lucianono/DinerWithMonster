@@ -23,25 +23,25 @@ func initDishName(dish_name):
 	global_dish_name = dish_name
 	match global_dish_name :
 		"Adobo" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/adobo_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/adobo_dish.png"))
 		"Pandesal" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/pandesal_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/pandesal_dish.png"))
 		"Balot" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/balot_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/balot_dish.png"))
 		"Betamax" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/betamax_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/betamax_dish.png"))
 		"MeatBalls" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/mball_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/mball_dish.png"))
 		"Relleno" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/relleno_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/relleno_dish.png"))
 		"Sisig" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/sisig_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/sisig_dish.png"))
 		"SquidBalls" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/sball_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/sball_dish.png"))
 		"Tokneneng" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/tokneneng_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/tokneneng_dish.png"))
 		"Calamares" :
-			get_node("Sprite").set_texture(preload("res://ImageAssets/dish/calamares_dish.png"))
+			get_node("Sprite2D").set_texture(preload("res://ImageAssets/dish/calamares_dish.png"))
 	print(dish_name)
 
 #for getting the ingredient type
@@ -63,7 +63,7 @@ func _on_dishready_area_entered(area):
 func _process(delta):
 	#for smart holding and throwing
 	if isPlayerHolding && !isPlayerThrowing:
-		set_position(get_node("/root/Node2D/YSort/Caldo-player").get_position()+Vector2(0,-hold_pos))
+		set_position(get_node("/root/Node2D/Node2D/Caldo-player").get_position()+Vector2(0,-hold_pos))
 	elif !isPlayerHolding && isPlayerThrowing:
 		if isClickOnRight:
 			set_position(position + Vector2(1,-1) * slope_vector * speed * delta)
@@ -78,7 +78,7 @@ func _process(delta):
 #for left clicking
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && isPlayerHolding:
+		if event.button_index == MOUSE_BUTTON_LEFT && isPlayerHolding:
 			if event.pressed:
 				set_deferred("monitoring",true)
 				set_deferred("monitorable",true)

@@ -3,14 +3,14 @@ extends Node
 signal attack(atk)
 
 var total_repair_points
-onready var repair_label = get_node("/root/Node2D/HUD/Label")
+@onready var repair_label = get_node("/root/Node2D/HUD/Label")
 
 var player_holding = []
 var player_dish_holding = null
 var isPlayerCooking = false
 
 var screensize
-onready var stall_obj
+@onready var stall_obj
 
 var repair_timer
 var countStallDestroyed = 0
@@ -53,18 +53,18 @@ func organize_line(col,row):
 		0:
 			destination_pos.y = 0
 		1:
-			destination_pos.y = 2*stall_obj.get_node("CollisionShape2D").shape.extents.y/4
+			destination_pos.y = 2*stall_obj.get_node("CollisionShape2D").shape.size.y/4
 		2:
-			destination_pos.y = 2*stall_obj.get_node("CollisionShape2D").shape.extents.y/2
+			destination_pos.y = 2*stall_obj.get_node("CollisionShape2D").shape.size.y/2
 		3:
-			destination_pos.y = 3 * 2*stall_obj.get_node("CollisionShape2D").shape.extents.y/4
+			destination_pos.y = 3 * 2*stall_obj.get_node("CollisionShape2D").shape.size.y/4
 		_:
 			destination_pos.y = -200
 	
 	
 	#center y pos		
 	if col != null and row != null:
-		destination_pos.y += ((screensize.y - 2*stall_obj.get_node("CollisionShape2D").shape.extents.y) / 2) + 16
+		destination_pos.y += ((screensize.y - 2*stall_obj.get_node("CollisionShape2D").shape.size.y) / 2) + 16
 		destination_pos.x += 40
 		
 	return(destination_pos)
